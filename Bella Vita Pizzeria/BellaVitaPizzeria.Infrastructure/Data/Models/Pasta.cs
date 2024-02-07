@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using BellaVitaPizzeria.Infrastructure.Data.Constants;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -16,11 +17,13 @@ namespace BellaVitaPizzeria.Infrastructure.Data.Models
         public int Id { get; set; }
 
         [Required]
+        [MaxLength(ValidationConstants.PastaTitleMaxLength)]
         [Comment("Име на пастата")]
         public required string Title { get; set; }
 
         [Required]
         [Comment("Съставки на паста")]
+        [MaxLength(ValidationConstants.PastaIngredientsMaxLength)]
         public required string Ingredients { get; set; }
 
         [Required]

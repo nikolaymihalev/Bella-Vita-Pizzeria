@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+﻿using BellaVitaPizzeria.Infrastructure.Data.Models;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
 namespace Bella_Vita_Pizzeria.Data
@@ -9,5 +10,6 @@ namespace Bella_Vita_Pizzeria.Data
             : base(options)
         {
         }
+        public DbSet<Pasta> Pastas { get; set; }
     }
 }
