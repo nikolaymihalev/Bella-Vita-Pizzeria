@@ -3,6 +3,7 @@ using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -17,13 +18,20 @@ namespace BellaVitaPizzeria.Infrastructure.Data.Models
         public int Id { get; set; }
 
         [Required]
-        [MaxLength(ValidationConstants.PastaTitleMaxLength)]
+        [Comment("Идентификатор на категорията на продукта")]
+        public int CategoryId { get; set; }
+
+        [ForeignKey(nameof(CategoryId))]
+        public Category Category { get; set; }
+
+        [Required]
+        [MaxLength(ValidationConstants.ProductTitleMaxLength)]
         [Comment("Име на продукта")]
         public required string Title { get; set; }
 
         [Required]
         [Comment("Съставки на продукта")]
-        [MaxLength(ValidationConstants.PastaIngredientsMaxLength)]
+        [MaxLength(ValidationConstants.ProductIngredientsMaxLength)]
         public required string Ingredients { get; set; }
 
         [Required]
