@@ -4,6 +4,7 @@ using Bella_Vita_Pizzeria.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Bella_Vita_Pizzeria.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240220133308_SeedProducts")]
+    partial class SeedProducts
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -148,7 +151,7 @@ namespace Bella_Vita_Pizzeria.Data.Migrations
                             Id = 2,
                             CategoryId = 2,
                             ImageUrl = "https://leonardobansko.bg/wp-content/uploads/2020/07/2020-07-27_13h48_32-601x385.png",
-                            Ingredients = "Прясно сварена паста (глутен), доматен сос, сос Болонезе (кайма, лук моркови), кашкавал (млечен продукт), маслина",
+                            Ingredients = "прясно сварена паста (глутен), доматен сос, сос Болонезе (кайма, лук моркови), кашкавал (млечен продукт), маслина",
                             Price = 15.5m,
                             PriceForPizzaBig = 0m,
                             PriceForPizzaFamily = 0m,

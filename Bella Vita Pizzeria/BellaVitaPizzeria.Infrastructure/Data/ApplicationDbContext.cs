@@ -19,12 +19,10 @@ namespace Bella_Vita_Pizzeria.Data
         protected override void OnModelCreating(ModelBuilder builder)
         {
             builder.Entity<ProductBuyer>().HasKey(x => new { x.ProductId, x.BuyerId });
-
-            builder.Entity<ProductBuyer>().HasOne(x => x.Product).WithMany(x => x.ProductsBuyers).OnDelete(DeleteBehavior.Restrict);
-
-            builder.Entity<Product>().Property(e => e.Price).HasPrecision(18, 8);
+            builder.Entity<ProductBuyer>().HasOne(x => x.Product).WithMany(x => x.ProductsBuyers).OnDelete(DeleteBehavior.Restrict);            
 
             builder.ApplyConfiguration(new CategoryConfiguration());
+            builder.ApplyConfiguration(new ProductConfiguration());
 
             base.OnModelCreating(builder);
         }
