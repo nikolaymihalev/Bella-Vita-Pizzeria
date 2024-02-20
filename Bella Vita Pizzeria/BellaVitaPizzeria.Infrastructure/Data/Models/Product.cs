@@ -45,5 +45,7 @@ namespace BellaVitaPizzeria.Infrastructure.Data.Models
         [Required]
         [Comment("Снимка на продукта")]
         public required byte[] Image { get; set; }
+
+        public IList<ProductBuyer> ProductsBuyers { get; set; } = new List<ProductBuyer>();
     }
 }

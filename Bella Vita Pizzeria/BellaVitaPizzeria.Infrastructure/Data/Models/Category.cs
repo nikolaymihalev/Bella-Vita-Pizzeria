@@ -20,5 +20,7 @@ namespace BellaVitaPizzeria.Infrastructure.Data.Models
         [MaxLength(ValidationConstants.CategoryNameMaxLength)]
         [Comment("Име на категорията")]
         public required string Name { get; set; }
+
+        public IEnumerable<Product> Products { get; set; } = new List<Product>();
     }
 }
