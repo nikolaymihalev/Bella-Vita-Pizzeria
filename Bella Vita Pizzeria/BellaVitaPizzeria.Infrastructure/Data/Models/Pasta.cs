@@ -9,33 +9,33 @@ using System.Threading.Tasks;
 
 namespace BellaVitaPizzeria.Infrastructure.Data.Models
 {
-    [Comment("Таблица за паста")]
+    [Comment("Таблица за продукта")]
     public class Pasta
     {
         [Key]
-        [Comment("Идентификатор на пастата")]
+        [Comment("Идентификатор на продукта")]
         public int Id { get; set; }
 
         [Required]
         [MaxLength(ValidationConstants.PastaTitleMaxLength)]
-        [Comment("Име на пастата")]
+        [Comment("Име на продукта")]
         public required string Title { get; set; }
 
         [Required]
-        [Comment("Съставки на паста")]
+        [Comment("Съставки на продукта")]
         [MaxLength(ValidationConstants.PastaIngredientsMaxLength)]
         public required string Ingredients { get; set; }
 
         [Required]
-        [Comment("Тегло на пастата")]
+        [Comment("Тегло на продукта")]
         public required string Weight { get; set; }
 
         [Required]
-        [Comment("Цена на пастата")]
+        [Comment("Цена на продукта")]
         public decimal Price { get; set; }
 
         [Required]
-        [Comment("Снимка на пастата")]
+        [Comment("Снимка на продукта")]
         public required byte[] Image { get; set; }
     }
 }
