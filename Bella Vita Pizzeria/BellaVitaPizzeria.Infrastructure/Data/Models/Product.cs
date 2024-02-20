@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 namespace BellaVitaPizzeria.Infrastructure.Data.Models
 {
     [Comment("Таблица за продукта")]
-    public class Pasta
+    public class Product
     {
         [Key]
         [Comment("Идентификатор на продукта")]

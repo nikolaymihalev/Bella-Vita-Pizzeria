@@ -10,6 +10,6 @@ namespace Bella_Vita_Pizzeria.Data
             : base(options)
         {
         }
-        public DbSet<Pasta> Products { get; set; }
+        public DbSet<Product> Products { get; set; }
     }
 }
