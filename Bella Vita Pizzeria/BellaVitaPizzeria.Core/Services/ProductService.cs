@@ -80,9 +80,28 @@ namespace BellaVitaPizzeria.Core.Services
                 }).ToListAsync();
         }
 
-        public Task<ProductDto?> GetByIdAsync(int id)
+        public async Task<ProductDto?> GetByIdAsync(int id)
         {
-            throw new NotImplementedException();
+            return await context.Products
+                .AsNoTracking()
+                .Where(x => x.Id == id)
+                .Select(x => new ProductDto()
+                {
+                    Id = x.Id,
+                    Title = x.Title,
+                    Ingredients = x.Ingredients,
+                    CategoryId = x.CategoryId,
+                    Weight = x.Weight,
+                    Price = x.Price,
+                    PriceForPizzaBig = x.PriceForPizzaBig,
+                    PriceForPizzaFamily = x.PriceForPizzaFamily,
+                    ImageUrl = x.ImageUrl,
+                    CategoryDto = new CategoryDto()
+                    {
+                        Id = x.Category.Id,
+                        Name = x.Category.Name,
+                    }
+                }).FirstOrDefaultAsync();
         }
     }
 }
