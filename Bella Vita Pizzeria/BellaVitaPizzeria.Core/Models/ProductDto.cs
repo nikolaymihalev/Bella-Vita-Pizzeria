@@ -64,6 +64,6 @@ namespace BellaVitaPizzeria.Core.Models
         [Required(ErrorMessage = ErrorMessagesConstants.RequireErrorMessage)]
         public required string ImageUrl { get; set; }
 
-        public CategoryDto Category { get; set; }
+        public CategoryDto CategoryDto { get; set; }
     }
 }

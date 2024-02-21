@@ -3,6 +3,7 @@ using BellaVitaPizzeria.Core.Contracts;
 using BellaVitaPizzeria.Core.Models;
 using BellaVitaPizzeria.Infrastructure.Data.Constants;
 using BellaVitaPizzeria.Infrastructure.Data.Models;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 
 namespace BellaVitaPizzeria.Core.Services
@@ -56,9 +57,27 @@ namespace BellaVitaPizzeria.Core.Services
             throw new NotImplementedException();
         }
 
-        public Task<IEnumerable<ProductDto>> GetAllProductsAsync()
+        public async Task<IEnumerable<ProductDto>> GetAllProductsAsync()
         {
-            throw new NotImplementedException();
+            return await context.Products
+                .AsNoTracking()
+                .Select(x => new ProductDto()
+                {
+                    Id = x.Id,
+                    Title = x.Title,
+                    Ingredients = x.Ingredients,
+                    CategoryId = x.CategoryId,
+                    Weight = x.Weight,
+                    Price = x.Price,
+                    PriceForPizzaBig = x.PriceForPizzaBig,
+                    PriceForPizzaFamily = x.PriceForPizzaFamily,
+                    ImageUrl = x.ImageUrl,
+                    CategoryDto = new CategoryDto()
+                    {
+                        Id = x.Category.Id,
+                        Name = x.Category.Name,
+                    }
+                }).ToListAsync();
         }
 
         public Task<ProductDto?> GetByIdAsync(int id)
