@@ -24,8 +24,7 @@
 
   <ItemGroup>
     <Folder Include="Data\Configuration\" />
-    <Folder Include="Data\Constants\" />
-    <Folder Include="Data\Models\" />
+    <Folder Include="Constants\" />
   </ItemGroup>
 
 </Project>
