@@ -5,8 +5,8 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace BellaVitaPizzeria.Infrastructure.Data.Models
 {
-    [Comment("User's favorite product")]
-    public class FavoriteProduct
+    [Comment("Product's rating")]
+    public class Rating
     {
         [Comment("Product identifier")]
         [Required]
@@ -21,5 +21,9 @@ namespace BellaVitaPizzeria.Infrastructure.Data.Models
 
         [ForeignKey(nameof(UserId))]
         public IdentityUser User { get; set; } = null!;
+
+        [Comment("Rating value")]
+        [Required]
+        public int Value { get; set; }
     }
 }

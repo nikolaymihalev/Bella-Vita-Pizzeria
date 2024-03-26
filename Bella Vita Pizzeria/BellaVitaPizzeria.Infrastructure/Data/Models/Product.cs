@@ -51,5 +51,8 @@ namespace BellaVitaPizzeria.Infrastructure.Data.Models
 
         [ForeignKey(nameof(CategoryId))]
         public Category Category { get; set; } = null!;
+
+        public IList<FavoriteProduct> FavoriteProducts { get; set; } = new List<FavoriteProduct>();
+        public IList<Rating> Ratings { get; set; } = new List<Rating>();
     }
 }
