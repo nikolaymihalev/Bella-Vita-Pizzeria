@@ -28,26 +28,26 @@ namespace BellaVitaPizzeria.Infrastructure.Data.Models
         [Required]
         public int CategoryId { get; set; }
 
-        [Comment("Product price for minimum weight")]
+        [Comment("Product price for minimum size")]
         [Required]
         public double MinimumPrice { get; set; }
 
-        [Comment("Product price for middle weight")]
+        [Comment("Product price for middle size")]
         public double? MiddlePrice { get; set; }
 
-        [Comment("Product price for maximum weight")]
+        [Comment("Product price for maximum size")]
         public double? MaximumPrice { get; set; }
 
-        [Comment("Product minimum weight")]
+        [Comment("Product minimum size")]
         [Required]
         [MaxLength(ValidationConstants.ProductWeightMaxLength)]
-        public string MinimumWeight { get; set; } = string.Empty;
+        public string MinimumSize { get; set; } = string.Empty;
 
-        [Comment("Product middle weight")]
-        public string? MiddleWeight { get; set; }
+        [Comment("Product middle size")]
+        public string? MiddleSize { get; set; }
 
-        [Comment("Product maximum weight")]
-        public string? MaxmimumWeight { get; set; }
+        [Comment("Product maximum size")]
+        public string? MaxmimumSize { get; set; }
 
         [ForeignKey(nameof(CategoryId))]
         public Category Category { get; set; } = null!;
