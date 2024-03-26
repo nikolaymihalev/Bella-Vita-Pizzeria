@@ -1,4 +1,6 @@
-﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+﻿using BellaVitaPizzeria.Infrastructure.Data.Configurations;
+using BellaVitaPizzeria.Infrastructure.Data.Models;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
 namespace Bella_Vita_Pizzeria.Data
@@ -10,8 +12,19 @@ namespace Bella_Vita_Pizzeria.Data
         {
         }
 
+        public DbSet<Category> Categories { get; set; } = null!;
+        public DbSet<Product> Products { get; set; } = null!;
+        public DbSet<FavoriteProduct> FavoriteProducts { get; set; } = null!;
+        public DbSet<Rating> Ratings { get; set; } = null!;
+
         protected override void OnModelCreating(ModelBuilder builder)
-        {         
+        {
+            builder.ApplyConfiguration(new UserConfiguration());
+            builder.ApplyConfiguration(new CategoryConfiguration());
+            builder.ApplyConfiguration(new ProductConfiguration());
+            builder.ApplyConfiguration(new FavoriteProductConfiguration());
+            builder.ApplyConfiguration(new RatingConfiguration());
+
             base.OnModelCreating(builder);
         }
     }

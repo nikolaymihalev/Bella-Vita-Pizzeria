@@ -1,7 +1,7 @@
 ﻿using BellaVitaPizzeria.Infrastructure.Data.Models;
 using Microsoft.AspNetCore.Identity;
 
-namespace BellaVitaPizzeria.Infrastructure.Data.Configuration
+namespace BellaVitaPizzeria.Infrastructure.Data.Configurations
 {
     internal class SeedData
     {

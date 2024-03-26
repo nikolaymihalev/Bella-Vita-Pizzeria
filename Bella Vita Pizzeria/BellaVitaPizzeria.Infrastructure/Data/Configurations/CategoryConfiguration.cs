@@ -2,7 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
-namespace BellaVitaPizzeria.Infrastructure.Data.Configuration
+namespace BellaVitaPizzeria.Infrastructure.Data.Configurations
 {
     internal class CategoryConfiguration : IEntityTypeConfiguration<Category>
     {
