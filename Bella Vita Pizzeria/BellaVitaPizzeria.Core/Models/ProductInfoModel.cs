@@ -46,17 +46,17 @@ namespace BellaVitaPizzeria.Core.Models
 
         public double MinimumPrice { get; set; }
 
-        public double? MiddlePrice { get; set; }
+        public double MiddlePrice { get; set; }
 
-        public double? MaximumPrice { get; set; }
+        public double MaximumPrice { get; set; }
 
         [Display(Name ="Small")]
         public string MinimumSize { get; set; }
 
         [Display(Name = "Big")]
-        public string? MiddleSize { get; set; }
+        public string MiddleSize { get; set; }
 
         [Display(Name = "Family")]
-        public string? MaxmimumSize { get; set; }
+        public string MaxmimumSize { get; set; }
     }
 }

@@ -37,7 +37,7 @@ namespace BellaVitaPizzeria.Core.Models
 
         public string? MiddleSize { get; set; }
 
-        public string? MaxmimumSize { get; set; }
+        public string? MaximumSize { get; set; }
 
         public IEnumerable<CategoryInfoModel> Categories { get; set; } = new List<CategoryInfoModel>();
     }
