@@ -53,11 +53,13 @@ namespace BellaVitaPizzeria.Infrastructure.Data.Configurations
         {
             Pizza = new Category()
             {
+                Id = 1,
                 Name = "Pizza"
             };
 
             Pasta = new Category()
             {
+                Id = 2,
                 Name = "Pasta"
             };
         }
@@ -66,9 +68,10 @@ namespace BellaVitaPizzeria.Infrastructure.Data.Configurations
         {
             Carbonara = new Product()
             {
+                Id = 1,
                 Title = "Carbonara",
                 Description = "Pizza with homemade fresh dough (gluten), cream (dairy product), prosciutto cotto, yellow cheese (dairy product), egg (egg)",
-                Image = File.ReadAllBytes(Path.Combine(@"..\..\BellaVitaPizzeria\BellaVitaPizzeria.Infrastructure\Images", "carbonara.jpg")),
+                Image = File.ReadAllBytes(Path.Combine(@"..\..\Bella Vita Pizzeria\BellaVitaPizzeria.Infrastructure\Images", "carbonara.jpg")),
                 CategoryId = Pizza.Id,
                 MinimumPrice = 15.00,
                 MiddlePrice = 16.00,
@@ -80,9 +83,10 @@ namespace BellaVitaPizzeria.Infrastructure.Data.Configurations
 
             Bolognese = new Product()
             {
+                Id = 2,
                 Title = "Bolognese",
                 Description = "Freshly cooked pasta (gluten), tomato sauce, Bolognese sauce (minced meat, onions, carrots), yellow cheese (dairy product), olive",
-                Image = File.ReadAllBytes(Path.Combine(@"..\..\BellaVitaPizzeria\BellaVitaPizzeria.Infrastructure\Images", "bolognese.jpg")),
+                Image = File.ReadAllBytes(Path.Combine(@"..\..\Bella Vita Pizzeria\BellaVitaPizzeria.Infrastructure\Images", "bolognese.jpg")),
                 CategoryId = Pasta.Id,
                 MinimumPrice = 15.50,
                 MinimumSize = "400 gr",
