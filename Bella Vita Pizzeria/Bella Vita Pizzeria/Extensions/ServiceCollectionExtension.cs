@@ -1,4 +1,6 @@
 ﻿using Bella_Vita_Pizzeria.Data;
+using BellaVitaPizzeria.Core.Contracts;
+using BellaVitaPizzeria.Core.Services;
 using BellaVitaPizzeria.Infrastructure.Common;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
@@ -9,6 +11,7 @@ namespace Microsoft.Extensions.DependencyInjection
     {
         public static IServiceCollection AddApplicationServices(this IServiceCollection services) 
         {
+            services.AddScoped<IProductService, ProductService>();
             return services;
         }
 
