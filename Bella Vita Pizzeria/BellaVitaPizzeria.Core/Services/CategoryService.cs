@@ -16,9 +16,22 @@ namespace BellaVitaPizzeria.Core.Services
             repository = _repository;
         }
 
-        public Task AddAsync(CategoryFormModel model)
+        public async Task AddAsync(CategoryFormModel model)
         {
-            throw new NotImplementedException();
+            var category = new Category() 
+            {
+                Name = model.Name,
+            };
+
+            try
+            {
+                await repository.AddAsync<Category>(category);
+                await repository.SaveChangesAsync();
+            }
+            catch (Exception)
+            {
+                throw new ApplicationException(ErrorMessagesConstants.OperationFailedErrorMessage);
+            }
         }
 
         public Task DeleteAsync(int id)
