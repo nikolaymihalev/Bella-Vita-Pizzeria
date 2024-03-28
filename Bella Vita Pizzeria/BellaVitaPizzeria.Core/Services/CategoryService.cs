@@ -1,6 +1,7 @@
 ﻿using BellaVitaPizzeria.Core.Contracts;
 using BellaVitaPizzeria.Core.Models;
 using BellaVitaPizzeria.Infrastructure.Common;
+using BellaVitaPizzeria.Infrastructure.Constants;
 using BellaVitaPizzeria.Infrastructure.Data.Models;
 using Microsoft.EntityFrameworkCore;
 
@@ -39,9 +40,18 @@ namespace BellaVitaPizzeria.Core.Services
                 .ToListAsync();
         }
 
-        public Task<CategoryInfoModel> GetByIdAsync(int id)
+        public async Task<CategoryInfoModel> GetByIdAsync(int id)
         {
-            throw new NotImplementedException();
+            var entity = await repository.GetByIdAsync<Category>(id);
+
+            if (entity != null) 
+            {
+                return new CategoryInfoModel(
+                    entity.Id, 
+                    entity.Name);                
+            }
+
+            throw new ArgumentException(string.Format(ErrorMessagesConstants.DoesntExistErrorMessage, "category"));
         }
     }
 }
