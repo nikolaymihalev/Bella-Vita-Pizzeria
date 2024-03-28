@@ -34,14 +34,32 @@ namespace BellaVitaPizzeria.Core.Services
             }
         }
 
-        public Task DeleteAsync(int id)
+        public async Task DeleteAsync(int id)
         {
-            throw new NotImplementedException();
+            var entity = await repository.GetByIdAsync<Category>(id);
+
+            if (entity != null) 
+            {
+                await repository.DeleteAsync<Category>(id);
+
+                await repository.SaveChangesAsync();
+            }
+
+            throw new ArgumentException(ErrorMessagesConstants.OperationFailedErrorMessage);
         }
 
-        public Task EditAsync(CategoryFormModel model)
+        public async Task EditAsync(CategoryFormModel model)
         {
-            throw new NotImplementedException();
+            var entity = await repository.GetByIdAsync<Category>(model.Id);
+
+            if (entity != null) 
+            {
+                entity.Name = model.Name;
+
+                await repository.SaveChangesAsync();
+            }
+
+            throw new ArgumentException(string.Format(ErrorMessagesConstants.InvalidModelErrorMessage, "category"));
         }
 
         public async Task<IEnumerable<CategoryInfoModel>> GetAllCategoriesAsync()
