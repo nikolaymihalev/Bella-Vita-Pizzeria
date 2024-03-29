@@ -1,6 +1,7 @@
 ﻿using BellaVitaPizzeria.Core.Contracts;
 using BellaVitaPizzeria.Core.Models;
 using BellaVitaPizzeria.Infrastructure.Common;
+using BellaVitaPizzeria.Infrastructure.Constants;
 using BellaVitaPizzeria.Infrastructure.Data.Models;
 using Microsoft.EntityFrameworkCore;
 using System.Linq;
@@ -16,9 +17,23 @@ namespace BellaVitaPizzeria.Core.Services
             repository = _repository;
         }
 
-        public Task AddAsync(FavoriteProductInfoModel model)
+        public async Task AddAsync(FavoriteProductInfoModel model)
         {
-            throw new NotImplementedException();
+            var entity = new FavoriteProduct()
+            {
+                UserId = model.UserId,
+                ProductId = model.ProductId,
+            };
+
+            try
+            {
+                await repository.AddAsync<FavoriteProduct>(entity);
+                await repository.SaveChangesAsync();
+            }
+            catch (Exception)
+            {
+                throw new ApplicationException(ErrorMessagesConstants.OperationFailedErrorMessage);
+            }
         }
 
         public async Task<IEnumerable<FavoriteProductInfoModel>> GetAllFavoriteProductsAsync()
@@ -41,7 +56,6 @@ namespace BellaVitaPizzeria.Core.Services
                         x.Product.MiddleSize ?? string.Empty,
                         x.Product.MaxmimumSize ?? string.Empty)))
                 .ToListAsync();
-
         }
 
         public async Task<IEnumerable<FavoriteProductInfoModel>> GetAllUserFavoriteProductsAsync(string userId)
