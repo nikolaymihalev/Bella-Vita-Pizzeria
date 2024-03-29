@@ -44,9 +44,27 @@ namespace BellaVitaPizzeria.Core.Services
 
         }
 
-        public Task<IEnumerable<FavoriteProductInfoModel>> GetAllUserFavoriteProductsAsync()
+        public async Task<IEnumerable<FavoriteProductInfoModel>> GetAllUserFavoriteProductsAsync(string userId)
         {
-            throw new NotImplementedException();
+            return await repository.AllReadonly<FavoriteProduct>()
+                .Where(x=>x.UserId == userId)
+                .Select(x => new FavoriteProductInfoModel(
+                    x.ProductId,
+                    x.UserId,
+                    new ProductInfoModel(
+                        x.Product.Id,
+                        x.Product.Title,
+                        x.Product.Description ?? string.Empty,
+                        Convert.ToBase64String(x.Product.Image),
+                        x.Product.CategoryId,
+                        x.Product.Category.Name,
+                        x.Product.MinimumPrice,
+                        x.Product.MiddlePrice ?? 0,
+                        x.Product.MaximumPrice ?? 0,
+                        x.Product.MinimumSize,
+                        x.Product.MiddleSize ?? string.Empty,
+                        x.Product.MaxmimumSize ?? string.Empty)))
+                .ToListAsync();
         }
 
         public Task RemoveAsync(int productId, string userId)
