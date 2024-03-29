@@ -4,7 +4,6 @@ using BellaVitaPizzeria.Infrastructure.Common;
 using BellaVitaPizzeria.Infrastructure.Constants;
 using BellaVitaPizzeria.Infrastructure.Data.Models;
 using Microsoft.EntityFrameworkCore;
-using System.Linq;
 
 namespace BellaVitaPizzeria.Core.Services
 {
@@ -81,9 +80,17 @@ namespace BellaVitaPizzeria.Core.Services
                 .ToListAsync();
         }
 
-        public Task RemoveAsync(int productId, string userId)
+        public async Task RemoveAsync(int productId, string userId)
         {
-            throw new NotImplementedException();
+            try
+            {
+                repository.Delete(new FavoriteProduct() { ProductId = productId, UserId = userId });
+                await repository.SaveChangesAsync();
+            }
+            catch (Exception)
+            {
+                throw new ApplicationException(ErrorMessagesConstants.OperationFailedErrorMessage);
+            }
         }
     }
 }
