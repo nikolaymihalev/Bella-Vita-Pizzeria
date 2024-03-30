@@ -7,5 +7,6 @@
         public const string OperationFailedErrorMessage = "Operation failed. Try again!";
         public const string InvalidModelErrorMessage = "Invalid {0}!";
         public const string DoesntExistErrorMessage = "This {0} doesn't exist!";
+        public const string RatingErrorMessage = "The rating must be between {1} and {2}!";
     }
 }

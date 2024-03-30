@@ -10,5 +10,8 @@
         
         public const int ProductWeightMinLength = 1;
         public const int ProductWeightMaxLength = 15;
+
+        public const int ProductMinRating = 0;
+        public const int ProductMaxRating = 5;
     }
 }
