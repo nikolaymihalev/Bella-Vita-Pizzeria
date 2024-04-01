@@ -7,7 +7,7 @@ namespace BellaVitaPizzeria.Core.Contracts
         Task AddAsync(RatingFormModel model);
         Task EditAsync(RatingFormModel model);
         Task DeleteAsync(int productId, string userId);
-        Task<double> GetAverageRatingAboutProduct(int productId);
-        Task<IEnumerable<RatingInfoModel>> GetAllRatingsAboutProduct(int productId);
+        Task<double> GetAverageRatingAboutProductAsync(int productId);
+        Task<IEnumerable<RatingInfoModel>> GetAllRatingsAboutProductAsync(int productId);
     }
 }

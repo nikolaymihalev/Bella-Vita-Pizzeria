@@ -11,6 +11,7 @@ namespace BellaVitaPizzeria.Core.Models
             ErrorMessage = ErrorMessagesConstants.RatingErrorMessage)]
         public int Value { get; set; }
 
+        [Required(ErrorMessage = ErrorMessagesConstants.RequireErrorMessage)]
         public int ProductId { get; set; }
 
         public string UserId { get; set; } = string.Empty;
