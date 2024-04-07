@@ -123,5 +123,40 @@ namespace BellaVitaPizzeria.Core.Services
 
             throw new ArgumentException(string.Format(ErrorMessagesConstants.DoesntExistErrorMessage, "product"));
         }
+
+        public async Task<ProductQueryModel> GetProductsForPageAsync(string? category = null, int currentPage = 1)
+        {
+            var model = new ProductQueryModel();
+
+            model.Products = await GetAllProductsAsync();
+
+            int formula = (currentPage - 1) * ValidationConstants.MaxProductsPerPage;
+
+            if (currentPage <= 1)
+            {
+                formula = 0;
+            }
+
+            if (category != null)
+            {
+                if (category.ToLower() != "all")
+                {
+                    model.Products = model.Products
+                        .Where(x => x.CategoryName.ToLower() == category.ToLower())
+                        .ToList();
+                    model.Category = category;
+                }
+            }
+
+            model.PagesCount = Math.Ceiling((model.Products.Count() / Convert.ToDouble(ValidationConstants.MaxProductsPerPage)));
+
+            model.Products = model.Products
+                .Skip(formula)
+                .Take(ValidationConstants.MaxProductsPerPage);
+
+            model.CurrentPage = currentPage;
+
+            return model;
+        }
     }
 }

@@ -13,5 +13,7 @@
 
         public const int ProductMinRating = 0;
         public const int ProductMaxRating = 5;
+
+        public const int MaxProductsPerPage = 10;
     }
 }
