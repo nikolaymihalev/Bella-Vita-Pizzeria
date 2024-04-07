@@ -40,6 +40,8 @@ namespace Microsoft.Extensions.DependencyInjection
                 .AddRoles<IdentityRole>()
                 .AddEntityFrameworkStores<ApplicationDbContext>();
 
+            services.AddRazorPages();
+
             return services;
         }
     }
