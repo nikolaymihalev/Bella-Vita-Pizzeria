@@ -1,4 +1,5 @@
 ﻿using BellaVitaPizzeria.Core.Contracts;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Bella_Vita_Pizzeria.Controllers
@@ -13,6 +14,7 @@ namespace Bella_Vita_Pizzeria.Controllers
         }
 
         [HttpGet]
+        [AllowAnonymous]
         public async Task<IActionResult> AllProducts() 
         {
             var model = await productService.GetProductsForPageAsync();
