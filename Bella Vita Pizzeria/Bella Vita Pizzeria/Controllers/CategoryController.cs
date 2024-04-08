@@ -13,5 +13,13 @@ namespace Bella_Vita_Pizzeria.Controllers
         {
             categoryService = _categoryService;
         }
+
+        [HttpGet]
+        public async Task<IActionResult> AllCategories() 
+        {
+            var model = await categoryService.GetAllCategoriesAsync();
+
+            return View(model);
+        }
     }
 }
