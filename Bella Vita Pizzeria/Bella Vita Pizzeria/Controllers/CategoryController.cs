@@ -9,16 +9,25 @@ namespace Bella_Vita_Pizzeria.Controllers
     public class CategoryController : Controller
     {
         private readonly ICategoryService categoryService;
+        private readonly IProductService productService;
 
-        public CategoryController(ICategoryService _categoryService)
+        public CategoryController(
+            ICategoryService _categoryService, 
+            IProductService _productService)
         {
             categoryService = _categoryService;
+            productService = _productService;
         }
 
         [HttpGet]
         public async Task<IActionResult> AllCategories() 
         {
             var model = await categoryService.GetAllCategoriesAsync();
+
+            foreach (var item in model) 
+            {
+                item.IsInUse = await IsCategoryInUse(item.Name);
+            }
 
             return View(model);
         }
@@ -81,6 +90,17 @@ namespace Bella_Vita_Pizzeria.Controllers
             await categoryService.EditAsync(model);
 
             return RedirectToAction(nameof(AllCategories));
+        }
+
+        private async Task<bool> IsCategoryInUse(string name) 
+        {
+            var products = await productService.GetAllProductsAsync();
+            var recipes = products.Where(x => x.CategoryName == name);
+
+            if (recipes.Any())
+                return true;
+
+            return false;
         }
     }
 }
