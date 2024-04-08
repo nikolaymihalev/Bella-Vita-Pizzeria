@@ -43,5 +43,44 @@ namespace Bella_Vita_Pizzeria.Controllers
 
             return RedirectToAction(nameof(AllCategories));
         }
+
+        [HttpGet]
+        public async Task<IActionResult> Edit(int id)
+        {
+            var category = await categoryService.GetByIdAsync(id);
+
+            if (category == null)
+            {
+                return BadRequest();
+            }
+
+            var model = new CategoryFormModel()
+            {
+                Id = category.Id,
+                Name = category.Name,
+            };
+
+            return View(model);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Edit(CategoryFormModel model, int id) 
+        {
+            var category = await categoryService.GetByIdAsync(id);
+
+            if (category == null)
+            {
+                return BadRequest();
+            }
+
+            if (!ModelState.IsValid) 
+            {
+                return View(model);
+            }
+
+            await categoryService.EditAsync(model);
+
+            return RedirectToAction(nameof(AllCategories));
+        }
     }
 }
