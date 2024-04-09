@@ -1,0 +1,32 @@
+﻿@model IEnumerable<FavoriteProductInfoModel>
+@{
+    ViewBag.Title = "My Favorite Products";
+}
+
+<h2 class="title">@ViewBag.Title</h2>
+<hr />
+
+<div class="text-start row">
+    @foreach (var r in Model)
+    {
+        <div class="card col-4" style="width: 20rem; ">
+            <div class="card-body">
+                <a asp-controller="Product" asp-action="Details" asp-route-id="@r.Product.Id" class="nav-link text-dark">
+                    <h5 class="card-title mt-1">@r.Product.Title</h5>
+                    <img class="card-img-top" src="data:image/png;base64,@r.Product.Image" alt="Image">
+                    <p class="mb-0"><span class="fw-bold">Category: </span>@r.Product.CategoryName</p>
+                    @if (r.Product.Description != null && !string.IsNullOrEmpty(r.Product.Description))
+                    {
+                        <p class="mb-0"><span class="fw-bold">Description: </span>@r.Product.Description</p>
+                    }
+                </a>
+                <a asp-controller="FavoriteRecipe" asp-action="RemoveFavoriteRecipe" asp-route-id="@r.Product.Id" class="btn btn-danger mb-2 w-100 p-3 fw-bold">Remove</a>
+
+            </div>
+        </div>
+    }
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}
