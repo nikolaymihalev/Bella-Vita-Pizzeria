@@ -45,11 +45,28 @@ namespace Bella_Vita_Pizzeria.Controllers
 
             await favoriteProductService.AddAsync(new FavoriteProductInfoModel
                 (
-                id,
-                User.Id(),
-                product));
+                    id,
+                    User.Id(),
+                    product));
 
             return RedirectToAction("Details", "Product", new { id });
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> RemoveFavoriteProduct(int id) 
+        {
+            var favoriteProducts = await favoriteProductService.GetAllFavoriteProductsAsync();
+
+            var product = favoriteProducts.FirstOrDefault(x=> x.ProductId == id && x.UserId == User.Id());
+
+            if (product == null) 
+            {
+                return BadRequest();
+            }
+
+            await favoriteProductService.RemoveAsync(id, User.Id());
+
+            return RedirectToAction(nameof(MyFavoriteProducts));
         }
     }
 }
