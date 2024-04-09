@@ -92,6 +92,26 @@ namespace Bella_Vita_Pizzeria.Controllers
             return RedirectToAction(nameof(AllCategories));
         }
 
+        [HttpGet]
+        public async Task<IActionResult> Delete(int id)
+        {
+            var category = await categoryService.GetByIdAsync(id);
+            if(category == null)
+            {
+                return BadRequest();
+            }
+
+            bool isInUse = await IsCategoryInUse(category.Name);
+
+            if (isInUse)
+            {
+                return BadRequest();
+            }
+
+            await categoryService.DeleteAsync(id);
+            return RedirectToAction(nameof(AllCategories));
+
+        }
         private async Task<bool> IsCategoryInUse(string name) 
         {
             var products = await productService.GetAllProductsAsync();
