@@ -1,0 +1,16 @@
+﻿@model RatingFormModel
+@{
+    ViewBag.Title = "Edit Rating";
+    ViewBag.OperationValue = "Edit";
+}
+
+<h2 class="title">@ViewBag.Title</h2>
+<hr />
+
+<form asp-controller="Rating" asp-action="Edit" method="post" enctype="multipart/form-data">
+    <partial name="_RatingPartial" model="@Model" />
+</form>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}
