@@ -1,0 +1,12 @@
+﻿@model RatingFormModel
+
+@for(int i = 1;i<=5;i++)
+{    
+    string imageText = i + ".png";
+    string label = $"Rate with {i} star";
+
+    <div class="text-center">
+        <img src="~/images/stars/@imageText" class="rounded mx-auto d-block" style="width: 500px;" alt="Image" />
+        <input asp-route-value="@i" asp-route-productId="@Model.ProductId" class="btn btn-info" type="submit" value=@label />
+    </div>
+}
