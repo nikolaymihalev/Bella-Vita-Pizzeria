@@ -89,5 +89,72 @@ namespace Bella_Vita_Pizzeria.Controllers
 
             return RedirectToAction(nameof(GetAllRatings), new { productId });
         }
+
+        [HttpGet]
+        public async Task<IActionResult> Edit(int productId)
+        {
+            var allRatings = await ratingService.GetAllRatingsAboutProductAsync(productId);
+
+            if (!allRatings.Any())
+            {
+                return BadRequest();
+            }
+
+            var product = allRatings.FirstOrDefault(x => x.UserId == User.Id() && x.ProductId == productId);
+
+            if (product == null)
+            {
+                return BadRequest();
+            }
+
+            if (product.UserId != User.Id())
+            {
+                return Unauthorized();
+            }
+
+            var model = new RatingFormModel()
+            {
+                ProductId = productId,
+                UserId = User.Id(),
+                Value = product.Value
+            };
+
+            return View(model);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Edit(RatingFormModel model, int productId)
+        {
+            var allRatings = await ratingService.GetAllRatingsAboutProductAsync(productId);
+
+            if (!allRatings.Any())
+            {
+                return BadRequest();
+            }
+
+            var product = allRatings.FirstOrDefault(x => x.UserId == User.Id() && x.ProductId == productId);
+
+            if (product == null)
+            {
+                return BadRequest();
+            }
+
+            if (product.UserId != User.Id())
+            {
+                return Unauthorized();
+            }
+
+            if (!ModelState.IsValid)
+            {
+                model.UserId = User.Id();
+                model.ProductId = productId;
+                return View(model);
+            }
+
+            model.UserId = User.Id();
+            await ratingService.EditAsync(model);
+
+            return RedirectToAction(nameof(GetAllRatings), new { productId });
+        }
     }
 }
