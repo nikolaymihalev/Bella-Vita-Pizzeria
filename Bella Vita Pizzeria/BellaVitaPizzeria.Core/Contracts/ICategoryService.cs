@@ -9,5 +9,6 @@ namespace BellaVitaPizzeria.Core.Contracts
         Task EditAsync(CategoryFormModel model);
         Task DeleteAsync(int id);
         Task<CategoryInfoModel> GetByIdAsync(int id);
+        Task<CategoryInfoModel> GetByNameAsync(string name);
     }
 }

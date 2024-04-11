@@ -84,5 +84,19 @@ namespace BellaVitaPizzeria.Core.Services
 
             throw new ArgumentException(string.Format(ErrorMessagesConstants.DoesntExistErrorMessage, "category"));
         }
+
+        public async Task<CategoryInfoModel> GetByNameAsync(string name)
+        {
+            var entity = await repository.AllReadonly<Category>().FirstOrDefaultAsync(x=>x.Name==name);
+
+            if (entity != null)
+            {
+                return new CategoryInfoModel(
+                    entity.Id,
+                    entity.Name);
+            }
+
+            throw new ArgumentException(string.Format(ErrorMessagesConstants.DoesntExistErrorMessage, "category"));
+        }
     }
 }
