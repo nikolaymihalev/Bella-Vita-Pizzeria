@@ -156,5 +156,26 @@ namespace Bella_Vita_Pizzeria.Controllers
 
             return RedirectToAction(nameof(GetAllRatings), new { productId });
         }
+
+        [HttpGet]
+        [Authorize(Roles = "Admin")]
+        public async Task<IActionResult> DeleteRating(int productId, string userId)
+        {
+            var rating = await ratingService.GetAllRatingsAboutProductAsync(productId);
+
+            if (rating.FirstOrDefault(x => x.UserId == userId) == null)
+            {
+                return BadRequest();
+            }
+
+            if (!User.IsInRole("Admin"))
+            {
+                return Unauthorized();
+            }
+
+            await ratingService.DeleteAsync(productId, userId);
+
+            return RedirectToAction(nameof(GetAllRatings), new { productId });
+        }
     }
 }
