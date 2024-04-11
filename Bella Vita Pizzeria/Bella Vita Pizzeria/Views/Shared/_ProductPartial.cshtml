@@ -1,0 +1,44 @@
+﻿@model ProductFormModel
+
+<input type="hidden" asp-for="@Model.Id" />
+<div class="form-group">
+    <label asp-for="Title"></label>
+    <input asp-for="Title" class="form-control" placeholder="Burger...">
+    <span asp-validation-for="Title" class="small text-danger"></span>
+</div>
+<br />
+<div class="form-group">
+    <label asp-for="Description"></label>
+    <textarea asp-for="Description" rows="4" class="form-control" placeholder="It's very tasty..."></textarea>
+    <span asp-validation-for="Description" class="small text-danger"></span>
+</div>
+<br />
+<div class="form-group">
+    <label asp-for="MaximumSize"></label>
+    <textarea asp-for="MaximumSize" rows="4" class="form-control" placeholder="Yogurt - 100 g..."></textarea>
+    <span asp-validation-for="MaximumSize" class="small text-danger"></span>
+</div>
+<br />
+<div class="form-group">
+    <label asp-for="MinimumPrice"></label>
+    <textarea asp-for="MinimumPrice" rows="4" class="form-control" placeholder="Wash and cut the potatoes..."></textarea>
+    <span asp-validation-for="MinimumPrice" class="small text-danger"></span>
+</div>
+<br />
+<div class="form-group">
+    <label asp-for="CategoryId"></label>
+    <select asp-for="CategoryId" class="form-control">
+        @foreach (var category in Model.Categories)
+        {
+            <option value="@category.Id">@category.Name</option>
+        }
+    </select>
+    <span asp-validation-for="CategoryId" class="small text-danger"></span>
+</div>
+<br />
+<label>Image:</label>
+<input type="file" name="ImageFile" accept="image/*" />
+
+<div class="text-center">
+    <input class="btn btn-primary mt-3" type="submit" value="@ViewBag.OperationValue" />
+</div>

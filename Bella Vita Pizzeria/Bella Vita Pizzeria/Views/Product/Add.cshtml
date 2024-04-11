@@ -1,0 +1,17 @@
+﻿@model ProductFormModel
+@{
+    ViewBag.Title = "Add Product";
+    ViewBag.OperationValue = "Add";
+}
+
+<h2 class="title">@ViewBag.Title</h2>
+<hr />
+
+<form asp-controller="Product" asp-action="Add" method="post" enctype="multipart/form-data">
+    <partial name="_ProductPartial" model="@Model" />
+</form>
+
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

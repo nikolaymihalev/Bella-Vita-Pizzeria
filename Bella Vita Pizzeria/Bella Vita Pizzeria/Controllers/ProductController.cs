@@ -46,7 +46,7 @@ namespace Bella_Vita_Pizzeria.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> AddRecipe(ProductFormModel model)
+        public async Task<IActionResult> Add(ProductFormModel model)
         {
             if (ModelState.IsValid == false)
             {
