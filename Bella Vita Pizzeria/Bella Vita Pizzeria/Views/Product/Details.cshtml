@@ -1,0 +1,88 @@
+﻿@model ProductInfoModel
+@{
+    ViewBag.Title = Model.Title;
+}
+
+<div class="row">
+    <div class="card w-100">
+        <div class="card-body">
+            <h3 class="card-title">@Model.Title</h3>
+            <img class="img-fluid" src="data:image/png;base64,@Model.Image" alt="Image" style="width: 500px; height: 350px;">
+            <br/>
+            <p class="mb-0"><span class="fw-bold">Category: </span>@Model.CategoryName</p>
+            <br />
+            <p class="mb-0"><span class="fw-bold">Description: </span>@Model.Description</p>
+            <br />
+        </div>
+
+
+        <h3>Reviews</h3>
+        <div class="row row-cols-1 row-cols-md-3 g-4">            
+            <div class="col">
+                <h4>Rating</h4>
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">Average Rating</h5>
+                        @if (Model.AverageRating >= 0 && Model.AverageRating < 1)
+                        {
+                            <img src="~/images/stars/0.png" class="card-img" alt="Image"/>
+                        }
+                        @if (Model.AverageRating >= 1 && Model.AverageRating < 2)
+                        {
+                            <img src="~/images/stars/1.png" class="card-img" alt="Image" />
+                        }
+                        @if (Model.AverageRating >= 2 && Model.AverageRating < 3)
+                        {
+                            <img src="~/images/stars/2.png" class="card-img" alt="Image" />
+                        }
+                        @if (Model.AverageRating >= 3 && Model.AverageRating < 4)
+                        {
+                            <img src="~/images/stars/3.png" class="card-img" alt="Image" />
+                        }
+                        @if (Model.AverageRating >= 4 && Model.AverageRating < 5)
+                        {
+                            <img src="~/images/stars/4.png" class="card-img" alt="Image" />
+                        }
+                        @if (Model.AverageRating == 5)
+                        {
+                            <img src="~/images/stars/5.png" class="card-img" alt="Image" />
+                        }
+                        <h3 class="card-text text-center">@Model.AverageRating</h3>
+                        @if (Model.AverageRating > 0)
+                        {
+                            <a asp-controller="Rating" asp-action="GetAllRatings" asp-route-productId="@Model.Id" class="fw-bold">View All Ratings</a>
+                        }
+                    </div>
+                </div>
+            </div>
+        </div>
+        <br />
+
+        @if (User?.Identity?.IsAuthenticated==true)
+        {         
+            @if (User.IsInRole("Admin"))
+            {
+                <a asp-controller="Product" asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-warning mb-2 w-100 p-3 fw-bold">Edit</a>
+                <a asp-controller="Product" asp-action="Delete" asp-route-id="@Model.Id" class="btn btn-danger mb-2 w-100 p-3 fw-bold">Delete</a>
+            }
+
+            @if (Model.IsInUserFavoriteCollection == false)
+            {
+                <a asp-controller="FavoriteRecipe" asp-action="AddFavoriteProduct" asp-route-id="@Model.Id" class="btn btn-warning mb-2 w-100 p-3 fw-bold">Add to Favorites</a>
+            }
+            @if (Model.IsInUserFavoriteCollection == true)
+            {
+                <a class="btn btn-warning mb-2 w-100 p-3 fw-bold disabled" disabled>Already added to Favorites</a>
+            }
+            <a asp-controller="Rating" asp-action="Add" asp-route-productId="@Model.Id" class="btn btn-warning mb-2 w-100 p-3 fw-bold">Rate the @Model.Title</a>
+
+            
+            <br/>            
+        }
+        <a asp-controller="Product" asp-action="AllProducts" class="btn btn-warning mb-2 w-100 p-3 fw-bold">Back to All Recipes</a>        
+    </div>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}
