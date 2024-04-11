@@ -101,5 +101,45 @@ namespace Bella_Vita_Pizzeria.Controllers
 
             return View(model);
         }
+
+        [HttpGet]
+        public async Task<IActionResult> Delete(int id)
+        {
+            var product = await productService.GetByIdAsync(id);
+
+            if (product == null)
+            {
+                return BadRequest();
+            }
+
+            if (User.IsInRole("Admin") == false)
+            {
+                return Unauthorized();
+            }
+
+            var allFr = await favoriteProductService.GetAllFavoriteProductsAsync();
+            var frToDelete = allFr.Where(x => x.ProductId == id).ToList();
+
+            if (frToDelete.Any())
+            {
+                foreach (var favorite in frToDelete)
+                {
+                    await favoriteProductService.RemoveAsync(favorite.ProductId, favorite.UserId);
+                }
+            }
+
+            var allRat = await ratingService.GetAllRatingsAboutProductAsync(id);
+            if (allRat.Any())
+            {
+                foreach (var rating in allRat)
+                {
+                    await ratingService.DeleteAsync(rating.ProductId, rating.UserId);
+                }
+            }
+
+            await productService.DeleteAsync(id);
+
+            return RedirectToAction(nameof(AllProducts));
+        }
     }
 }
