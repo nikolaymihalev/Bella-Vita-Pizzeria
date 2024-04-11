@@ -58,5 +58,7 @@ namespace BellaVitaPizzeria.Core.Models
 
         [Display(Name = "Family")]
         public string MaxmimumSize { get; set; }
+        public bool IsInUserFavoriteCollection { get; set; }
+        public double AverageRating { get; set; }
     }
 }

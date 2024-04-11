@@ -77,5 +77,29 @@ namespace Bella_Vita_Pizzeria.Controllers
             model.Categories = await categoryService.GetAllCategoriesAsync();
             return View(model);
         }
+
+        [HttpGet]
+        [AllowAnonymous]
+        public async Task<IActionResult> Details(int id)
+        {
+            var model = await productService.GetByIdAsync(id);
+
+            if (model == null)
+            {
+                return BadRequest();
+            }
+
+            var favorites = await favoriteProductService.GetAllFavoriteProductsAsync();
+
+            bool isInFavorite = favorites.Any(x => x.UserId == User.Id()) && favorites.Any(x => x.ProductId == id);
+
+            model.IsInUserFavoriteCollection = isInFavorite;
+
+            double averageRating = await ratingService.GetAverageRatingAboutProductAsync(id);
+
+            model.AverageRating = averageRating;
+
+            return View(model);
+        }
     }
 }
