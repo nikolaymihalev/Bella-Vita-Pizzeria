@@ -28,9 +28,9 @@ namespace Bella_Vita_Pizzeria.Controllers
 
         [HttpGet]
         [AllowAnonymous]
-        public async Task<IActionResult> AllProducts() 
+        public async Task<IActionResult> AllProducts(string category, int currentPage = 1) 
         {
-            var model = await productService.GetProductsForPageAsync();
+            var model = await productService.GetProductsForPageAsync(category,currentPage);
 
             return View(model);
         }
