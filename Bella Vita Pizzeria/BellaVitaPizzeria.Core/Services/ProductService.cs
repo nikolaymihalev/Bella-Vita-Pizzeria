@@ -103,6 +103,7 @@ namespace BellaVitaPizzeria.Core.Services
         public async Task<ProductInfoModel> GetByIdAsync(int id)
         {
             Product? entity = await repository.GetByIdAsync<Product>(id);
+            var category = await repository.AllReadonly<Category>().FirstAsync(x=>x.Id==entity.CategoryId);
 
             if (entity != null) 
             {
@@ -112,7 +113,7 @@ namespace BellaVitaPizzeria.Core.Services
                     entity.Description ?? string.Empty,
                     Convert.ToBase64String(entity.Image),
                     entity.CategoryId,
-                    entity.Category.Name,
+                    category.Name,
                     entity.MinimumPrice,
                     entity.MiddlePrice ?? 0,
                     entity.MaximumPrice ?? 0,
