@@ -12,16 +12,38 @@
 <div class="row">
     <div class="card w-100">
         <div class="card-body">
+            <div class="row row-cols-1 row-cols-md-3 g-4">
+                <div class="col">
+                    <img class="img-fluid" src="data:image/png;base64,@Model.Image" alt="Image" style="width: 500px; height: 250px;">
+                    <br>
+                    @if (User?.Identity?.IsAuthenticated==true && Model.IsInUserFavoriteCollection == false)
+                    {
+                        <a asp-controller="FavoriteProduct" asp-action="AddFavoriteProduct" asp-route-id="@Model.Id" class="btn btn-warning">Add to favorites</a>                        
+                    }
+                    @if (User?.Identity?.IsAuthenticated == true && Model.IsInUserFavoriteCollection == true)
+                    {
+                        <a class="btn btn-warning disabled" disabled>Already added to Favorites</a>
+                    }
+                </div>
+                <div class="col">
+                    <h3>@Model.Title</h3><br>                    
+                    <p class="mb-0">@Model.Description</p><br>
+                    <p class="lh-lg mb-0"><span class="fw-bold">Small(@Model.MinimumSize)</span>...........................................<span class="fw-bold" style="color:red">@Model.MinimumPrice lv.</span> <a href="#" id="searchLink" class="btn btn-danger">Buy</a></p><br>
+                    
+                    @if (Model.MiddleSize != null && string.IsNullOrEmpty(Model.MiddleSize) == false && Model.MiddleSize!="")
+                    {
+                        <p class="lh-lg mb-0"><span class="fw-bold">Middle(@Model.MiddleSize)</span>...........................................<span class="fw-bold" style="color:red">@Model.MiddlePrice lv.</span> <a href="#" id="searchLink" class="btn btn-danger">Buy</a></p><br>
+                    }
 
-            <h3 class="card-title">@Model.Title</h3>
-            <img class="img-fluid" src="data:image/png;base64,@Model.Image" alt="Image" style="width: 500px; height: 350px;">
-            <br/>
-            <p class="mb-0"><span class="fw-bold">Description: </span>@Model.Description</p>
-            <br />
+                    @if (Model.MaxmimumSize != null && string.IsNullOrEmpty(Model.MaxmimumSize) == false && Model.MaxmimumSize != "")
+                    {
+                        <p class="lh-lg mb-0"><span class="fw-bold">Family(@Model.MaxmimumSize)</span>...........................................<span class="fw-bold" style="color:red">@Model.MaximumPrice lv.</span> <a href="#" id="searchLink" class="btn btn-danger">Buy</a></p>
+                        <br>
+                    }
+                </div>                
+            </div>            
         </div>
-
-        <h3>Reviews</h3>
-        <div class="row row-cols-1 row-cols-md-3 g-4">            
+        <div class="row row-cols-1 row-cols-md-3 g-4">
             <div class="col">
                 <h4>Rating</h4>
                 <div class="card">
@@ -29,7 +51,7 @@
                         <h5 class="card-title">Average Rating</h5>
                         @if (Model.AverageRating >= 0 && Model.AverageRating < 1)
                         {
-                            <img src="~/images/stars/0.png" class="card-img" alt="Image"/>
+                            <img src="~/images/stars/0.png" class="card-img" alt="Image" />
                         }
                         @if (Model.AverageRating >= 1 && Model.AverageRating < 2)
                         {
@@ -59,31 +81,14 @@
                     </div>
                 </div>
             </div>
-        </div>
-        <br />
-
         @if (User?.Identity?.IsAuthenticated==true)
         {         
             @if (User.IsInRole("Admin"))
             {
-                <a asp-controller="Product" asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-warning mb-2 w-100 p-3 fw-bold">Edit</a>
                 <a asp-controller="Product" asp-action="Delete" asp-route-id="@Model.Id" class="btn btn-danger mb-2 w-100 p-3 fw-bold">Delete</a>
-            }
-
-            @if (Model.IsInUserFavoriteCollection == false)
-            {
-                <a asp-controller="FavoriteRecipe" asp-action="AddFavoriteProduct" asp-route-id="@Model.Id" class="btn btn-warning mb-2 w-100 p-3 fw-bold">Add to Favorites</a>
-            }
-            @if (Model.IsInUserFavoriteCollection == true)
-            {
-                <a class="btn btn-warning mb-2 w-100 p-3 fw-bold disabled" disabled>Already added to Favorites</a>
-            }
-            <a asp-controller="Rating" asp-action="Add" asp-route-productId="@Model.Id" class="btn btn-warning mb-2 w-100 p-3 fw-bold">Rate the @Model.Title</a>
-
-            
-            <br/>            
+            }          
         }
-        <a asp-controller="Product" asp-action="AllProducts" class="btn btn-warning mb-2 w-100 p-3 fw-bold">Back to All Recipes</a>        
+        </div>
     </div>
 </div>
 
