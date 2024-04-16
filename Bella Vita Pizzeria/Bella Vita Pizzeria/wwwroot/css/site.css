@@ -20,3 +20,18 @@ html {
 body {
   margin-bottom: 60px;
 }
+.image img {
+    width: 100%;
+    height: 100%;
+}
+
+.image {
+    position: relative;
+}
+
+.image h2 {
+    position: absolute;
+    top: 40%;
+    bottom: 100%;
+    left: 50%
+}

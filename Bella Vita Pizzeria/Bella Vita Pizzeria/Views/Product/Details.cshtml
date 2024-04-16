@@ -2,19 +2,23 @@
 @{
     ViewBag.Title = Model.Title;
 }
+<figure class="image">
+    <img src="~/images/Details_Banner.png" alt="background">
+    <h2>
+        @Model.CategoryName
+    </h2>
+</figure>
 
 <div class="row">
     <div class="card w-100">
         <div class="card-body">
+
             <h3 class="card-title">@Model.Title</h3>
             <img class="img-fluid" src="data:image/png;base64,@Model.Image" alt="Image" style="width: 500px; height: 350px;">
             <br/>
-            <p class="mb-0"><span class="fw-bold">Category: </span>@Model.CategoryName</p>
-            <br />
             <p class="mb-0"><span class="fw-bold">Description: </span>@Model.Description</p>
             <br />
         </div>
-
 
         <h3>Reviews</h3>
         <div class="row row-cols-1 row-cols-md-3 g-4">            
