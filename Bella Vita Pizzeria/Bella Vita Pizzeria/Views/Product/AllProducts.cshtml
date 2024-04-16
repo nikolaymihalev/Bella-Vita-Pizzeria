@@ -1,24 +1,36 @@
 ﻿@model ProductQueryModel
 @{
-    ViewBag.Title = "All Products";
+    ViewBag.Title = "Products";
 }
-<h2 class="title">Products</h2>
-<hr />
+<figure class="image">
+    <img src="~/images/Details_Banner.png" alt="background">
+    <h2>
+        @Model.Category
+    </h2>
+</figure>
 
 @if (Model.Products.Any())
 {
+    <p class="text-end">Total @Model.Products.Count() products</p>
     <div class="text-center row">
-        @foreach (var r in Model.Products)
+        @foreach (var p in Model.Products)
         {
             <div class="card text-center col-4" style="width: 20rem; ">
                 <div class="card-body">
-                    <a asp-controller="Product" asp-action="Details" asp-route-id="@r.Id" class="nav-link text-dark">
-                        <h5 class="card-title mt-1">@r.Title</h5>
-                        <img class="card-img-top" src="data:image/png;base64,@r.Image" alt="Image" style="width: 250px; height: 150px;">
-                        <p class="mb-0"><span class="fw-bold">Category: </span>@r.CategoryName</p>
-                        @if (r.Description != null && !string.IsNullOrEmpty(r.Description))
+                    <a asp-controller="Product" asp-action="Details" asp-route-id="@p.Id" class="nav-link text-dark">
+                        <h5 class="card-title mt-1">@p.Title</h5>
+                        <img class="card-img-top" src="data:image/png;base64,@p.Image" alt="Image" style="width: 250px; height: 150px;">
+                        @if (p.Description != null && !string.IsNullOrEmpty(p.Description))
                         {
-                            <p class="mb-0"><span class="fw-bold">Description: </span>@r.Description</p>
+                            <p class="mb-0">@p.Description</p>
+                            if (p.MaxmimumSize != null && string.IsNullOrEmpty(p.MaxmimumSize) == false && p.MaxmimumSize != "")
+                            {
+                                <p class="mb-0"><span class="fw-bold" style="color: red; font-size:25px;">@p.MinimumPrice - @p.MaximumPrice lv.</span></p>
+                            }
+                            if (p.MaxmimumSize == null || string.IsNullOrEmpty(p.MaxmimumSize) || p.MaxmimumSize == "")
+                            {
+                                <p class="mb-0"><span class="fw-bold" style="color: red; font-size:25px;">@p.MinimumPrice lv.</span></p>
+                            }
                         }
                     </a>
                 </div>
