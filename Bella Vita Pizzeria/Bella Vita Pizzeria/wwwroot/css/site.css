@@ -35,3 +35,17 @@ body {
     bottom: 100%;
     left: 50%
 }
+.navbar {
+    text-align: center;
+}
+
+.navbar-nav {
+    display: inline-block;
+    list-style: none;
+    padding: 0;
+}
+
+.nav-item {
+    display: inline-block;
+    margin: 0 10px;
+}
