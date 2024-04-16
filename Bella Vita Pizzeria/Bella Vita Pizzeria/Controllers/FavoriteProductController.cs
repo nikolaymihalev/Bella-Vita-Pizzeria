@@ -31,7 +31,7 @@ namespace Bella_Vita_Pizzeria.Controllers
         {
             var favoriteProducts = await favoriteProductService.GetAllFavoriteProductsAsync();
 
-            if(favoriteProducts.Any(x=> x.ProductId == id))
+            if(favoriteProducts.Any(x=> x.ProductId == id && x.UserId==User.Id()))
             {
                 return BadRequest();
             }
