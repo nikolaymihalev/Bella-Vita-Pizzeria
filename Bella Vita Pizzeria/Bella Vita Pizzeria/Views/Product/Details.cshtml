@@ -14,11 +14,17 @@
                     <br>
                     @if (User?.Identity?.IsAuthenticated==true && Model.IsInUserFavoriteCollection == false)
                     {
-                        <a asp-controller="FavoriteProduct" asp-action="AddFavoriteProduct" asp-route-id="@Model.Id" class="btn btn-warning">Add to favorites</a>                        
+                        <a asp-controller="FavoriteProduct" asp-action="AddFavoriteProduct" asp-route-id="@Model.Id" style="color: black; text-decoration: none;">
+                            <img src="~/images/heart.png" style="width: 30px; height: 30px" />
+                            Add to favorites
+                        </a>                        
                     }
                     @if (User?.Identity?.IsAuthenticated == true && Model.IsInUserFavoriteCollection == true)
                     {
-                        <a class="btn btn-warning disabled" disabled>Already added to favorites</a>
+                        <a disabled style="color: black; text-decoration: none;">
+                            <img src="~/images/heart_red.png" style="width: 30px; height: 30px" />
+                            Already added to favorites
+                        </a>
                     }
                 </div>
                 <div class="col">
