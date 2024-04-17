@@ -1,0 +1,19 @@
+﻿@model ProductInfoModel
+
+
+<a asp-controller="Product" asp-action="Details" asp-route-id="@Model.Id" class="nav-link text-dark">
+    <h5 class="card-title mt-1">@Model.Title</h5>
+    <img class="card-img-top" src="data:image/png;base64,@Model.Image" alt="Image" style="width: 250px; height: 150px;">
+    @if (Model.Description != null && !string.IsNullOrEmpty(Model.Description))
+    {
+        <p class="mb-0">@Model.Description</p>
+        if (Model.MaxmimumSize != null && string.IsNullOrEmpty(Model.MaxmimumSize) == false && Model.MaxmimumSize != "")
+        {
+            <p class="mb-0"><span class="fw-bold" style="color: red; font-size:25px;">@Model.MinimumPrice - @Model.MaximumPrice lv.</span></p>
+        }
+        if (Model.MaxmimumSize == null || string.IsNullOrEmpty(Model.MaxmimumSize) || Model.MaxmimumSize == "")
+        {
+            <p class="mb-0"><span class="fw-bold" style="color: red; font-size:25px;">@Model.MinimumPrice lv.</span></p>
+        }
+    }
+</a>
