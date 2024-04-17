@@ -2,12 +2,8 @@
 @{
     ViewBag.Title = "Products";
 }
-<figure class="image">
-    <img src="~/images/Details_Banner.png" alt="background">
-    <h2>
-        @Model.Category
-    </h2>
-</figure>
+
+<partial name="_PageBannerPartial" model="@Model.Category" />
 
 @if (Model.Products.Any())
 {

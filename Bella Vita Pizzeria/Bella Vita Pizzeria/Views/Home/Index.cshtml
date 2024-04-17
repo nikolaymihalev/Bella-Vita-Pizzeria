@@ -1,22 +1,30 @@
 ﻿<div style="position: relative;  text-align: center;">
-    <img src="~/images/pizza.jpg" style="width: 100%" alt="Pizza" />
-    <img src="~/images/Banner.png" style="position: absolute;  top: 50%;  left: 50%;  transform: translate(-50%, -50%); width:600px" alt="Pizza" />
-    <h1 style="position: absolute;  top: 50%;  left: 50%;  transform: translate(-50%, -120%); color: aliceblue;">
-        Satiate your hunger!
-    </h1>
+    <img src="~/images/pizza.png" style="width: 100%" alt="Pizza" />
+    
 </div>
 <br>
 <div class="text-center row">
-    @for(int i=0;i<ViewBag.Categories.Count;i++)
-    {
-        var imageSrc = ViewBag.Categories[i].Name + ".jfif";
-        <div class="card text-center col-4" style="width: 10rem; ">
-            <div class="card-body">                
-                <a asp-action="AllProducts" asp-controller="Product" asp-route-category="@ViewBag.Categories[i].Name" class="nav-link text-dark">
-                    <img class="card-img-top" src="~/images/categories/@imageSrc" alt="Image" style="width: 3rem; height: 3rem;">
-                    <h5 class="card-title mt-1">@ViewBag.Categories[i].Name</h5>
-                </a>
-            </div>
-        </div>        
+    @{
+        int count = 0;
+        if (ViewBag.Categories.Count > 8)
+        {
+            count = 8;
+        }
+        else
+        {
+            count = ViewBag.Categories.Count;
+        }
+        for (int i = 0; i < count; i++)
+        {
+            var imageSrc = ViewBag.Categories[i].Name + ".jfif";
+            <div class="card text-center col-4" style="width: 10rem; ">
+                <div class="card-body">                
+                    <a asp-action="AllProducts" asp-controller="Product" asp-route-category="@ViewBag.Categories[i].Name" class="nav-link text-dark">
+                        <img class="card-img-top" src="~/images/categories/@imageSrc" alt="Image" style="width: 3rem; height: 3rem;">
+                        <h5 class="card-title mt-1">@ViewBag.Categories[i].Name</h5>
+                    </a>
+                </div>
+            </div>        
+        }
     }
 </div>

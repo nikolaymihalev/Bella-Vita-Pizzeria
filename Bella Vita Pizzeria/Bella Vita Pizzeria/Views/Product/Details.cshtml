@@ -2,12 +2,8 @@
 @{
     ViewBag.Title = Model.Title;
 }
-<figure class="image">
-    <img src="~/images/Details_Banner.png" alt="background">
-    <h2>
-        @Model.CategoryName
-    </h2>
-</figure>
+
+<partial name="_PageBannerPartial" model="@Model.CategoryName" />
 
 <div class="row">
     <div class="card w-100">
