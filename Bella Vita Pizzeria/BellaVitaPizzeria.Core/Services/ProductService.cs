@@ -42,6 +42,34 @@ namespace BellaVitaPizzeria.Core.Services
             }
         }
 
+        public async Task AddToCartAsync(PurchaseModel model)
+        {
+            var purchase = repository.AllReadonly<Cart>()
+                .FirstOrDefaultAsync(x => x.UserId == model.CartId)
+                .Result?.Purchases.FirstOrDefault(x => x.Title == model.Title && x.Size == model.Size);
+
+            if (purchase != null)
+            {
+                purchase.Quantity++;
+            }
+            else 
+            {
+                var newPurchase = new Purchase()
+                {
+                    Title = model.Title,
+                    Size = model.Size,
+                    Quantity = 1,
+                    Image = Convert.FromBase64String(model.Image),
+                    UnitPrice = model.UnitPrice,
+                    CartId = model.CartId,
+                };
+                await repository.AddAsync<Purchase>(newPurchase);
+            }
+
+            await repository.SaveChangesAsync();
+
+        }
+
         public async Task DeleteAsync(int id)
         {
             var product = await repository.GetByIdAsync<Product>(id);
