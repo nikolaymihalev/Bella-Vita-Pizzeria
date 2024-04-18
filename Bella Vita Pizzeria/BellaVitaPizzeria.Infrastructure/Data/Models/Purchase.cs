@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace BellaVitaPizzeria.Infrastructure.Data.Models
 {
@@ -31,6 +32,13 @@ namespace BellaVitaPizzeria.Infrastructure.Data.Models
         public double UnitPrice { get; set; }
 
         [Comment("Purchase price")]
-        public double Sum => UnitPrice*Quantity;        
+        public double Sum => UnitPrice*Quantity;
+
+        [Comment("Client's cart identifier")]
+        [Required]
+        public string CartId { get; set; } = string.Empty;
+
+        [ForeignKey(nameof(CartId))]
+        public Cart Cart { get; set; }
     }
 }
