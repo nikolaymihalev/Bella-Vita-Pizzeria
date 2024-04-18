@@ -12,6 +12,8 @@ namespace BellaVitaPizzeria.Infrastructure.Data.Configurations
             SeedProducts();
             SeedRatings();
             SeedFavoriteProducts();
+            SeedPurchases();
+            SeedCarts();
         }
         public IdentityUser Buyer { get; private set; } = null!;
         public IdentityUser Guest { get; private set; } = null!;
@@ -22,6 +24,8 @@ namespace BellaVitaPizzeria.Infrastructure.Data.Configurations
         public Rating FiveStarRating { get; private set; } = null!;
         public Rating ThreeStarRating { get; private set; } = null!;
         public FavoriteProduct FirstFavoriteProduct { get; private set; } = null!;
+        public Purchase FirstPurchase { get; private set; } = null!;
+        public Cart BuyerCart { get; private set; } = null!;
 
         private void SeedUsers() 
         {
@@ -116,6 +120,29 @@ namespace BellaVitaPizzeria.Infrastructure.Data.Configurations
             {
                 ProductId = Carbonara.Id,
                 UserId = Guest.Id,
+            };
+        }
+
+        private void SeedPurchases() 
+        {
+            FirstPurchase = new Purchase()
+            {
+                Id = 1,
+                Title = Carbonara.Title,
+                Size = Carbonara.MinimumSize,
+                Image = Carbonara.Image,
+                Quantity = 2,
+                UnitPrice = Carbonara.MinimumPrice,
+                CartId = Buyer.Id
+            };
+        }
+
+        private void SeedCarts()
+        {
+            BuyerCart = new Cart()
+            {
+                UserId = Buyer.Id,                
+                Sum = 30
             };
         }
     }
