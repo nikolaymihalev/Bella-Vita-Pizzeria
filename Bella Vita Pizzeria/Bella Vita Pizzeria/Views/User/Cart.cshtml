@@ -1,0 +1,16 @@
+﻿@model IEnumerable<PurchaseModel>
+
+@if (Model.Any())
+{
+    <div class="text-center row">
+        @foreach (var p in Model)
+        {
+            <div class="card text-center col-4" style="width: 20rem; ">
+                <div class="card-body">
+                    <h2 class="card-title">@p.Title</h2>
+                </div>
+            </div>
+        }
+
+    </div>
+}

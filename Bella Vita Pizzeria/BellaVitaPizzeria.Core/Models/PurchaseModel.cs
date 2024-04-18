@@ -9,7 +9,7 @@
             string image,
             int quantity,
             double unitPrice,
-            string cartId)
+            string userId)
         {
             Id = id;
             Title = title;
@@ -17,7 +17,7 @@
             Image = image;
             Quantity = quantity;
             UnitPrice = unitPrice;
-            CartId = cartId;
+            UserId = userId;
         }
         public int Id { get; set; }
         public string Title { get; set; }
@@ -26,6 +26,6 @@
         public int Quantity { get; set; }
         public double UnitPrice { get; set; }
         public double Sum => UnitPrice * Quantity;
-        public string CartId { get; set; } 
+        public string UserId { get; set; } 
     }
 }

@@ -9,15 +9,17 @@ namespace BellaVitaPizzeria.Infrastructure.Data.Models
     public class Cart
     {
         [Comment("Client identifier")]
-        [Key]
-        public string UserId { get; set; } = string.Empty;
-
-        [Comment("Order sum")]
         [Required]
-        public double Sum { get; set; }
+        public string UserId { get; set; }
 
         [ForeignKey(nameof(UserId))]
         public IdentityUser User { get; set; }
-        public IList<Purchase> Purchases { get; set; } = new List<Purchase>();
+
+        [Comment("Purchase identifier")]
+        [Required]
+        public int PurchaseId { get; set; }
+
+        [ForeignKey(nameof(PurchaseId))]
+        public Purchase Purchase { get; set; }
     }
 }

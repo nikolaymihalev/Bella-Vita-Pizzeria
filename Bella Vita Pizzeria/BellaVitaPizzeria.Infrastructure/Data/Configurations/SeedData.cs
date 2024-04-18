@@ -133,16 +133,15 @@ namespace BellaVitaPizzeria.Infrastructure.Data.Configurations
                 Image = Carbonara.Image,
                 Quantity = 2,
                 UnitPrice = Carbonara.MinimumPrice,
-                CartId = Buyer.Id
             };
         }
 
-        private void SeedCarts()
+        private void SeedCarts() 
         {
             BuyerCart = new Cart()
             {
-                UserId = Buyer.Id,                
-                Sum = 30
+                UserId = Buyer.Id,
+                PurchaseId = FirstPurchase.Id,
             };
         }
     }

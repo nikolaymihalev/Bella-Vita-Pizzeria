@@ -44,26 +44,25 @@ namespace BellaVitaPizzeria.Core.Services
 
         public async Task AddToCartAsync(PurchaseModel model)
         {
-            var purchase = repository.AllReadonly<Cart>()
-                .FirstOrDefaultAsync(x => x.UserId == model.CartId)
-                .Result?.Purchases.FirstOrDefault(x => x.Title == model.Title && x.Size == model.Size);
+            var cart = repository.AllReadonly<Cart>()
+                .FirstOrDefault(x => x.UserId == model.UserId && x.Purchase.Title == model.Title && x.Purchase.Size == model.Size);
 
-            if (purchase != null)
+            if (cart != null)
             {
-                purchase.Quantity++;
+                cart.Purchase.Quantity++;
             }
             else 
             {
-                var newPurchase = new Purchase()
+                var purchase = new Purchase()
                 {
                     Title = model.Title,
                     Size = model.Size,
                     Quantity = 1,
                     Image = Convert.FromBase64String(model.Image),
                     UnitPrice = model.UnitPrice,
-                    CartId = model.CartId,
                 };
-                await repository.AddAsync<Purchase>(newPurchase);
+                await repository.AddAsync<Purchase>(purchase);
+                await repository.AddAsync<Cart>(new Cart() { UserId = model.UserId, Purchase = purchase });
             }
 
             await repository.SaveChangesAsync();
@@ -187,29 +186,19 @@ namespace BellaVitaPizzeria.Core.Services
             return model;
         }
 
-        public async Task<CartModel> GetPurchases(string cartId)
+        public async Task<IEnumerable<PurchaseModel>> GetPurchasesAsync(string userId)
         {
-            var cart = await repository.GetByIdAsync<Cart>(cartId);
-
-            if (cart == null) 
-            {
-                throw new ArgumentException(ErrorMessagesConstants.OperationFailedErrorMessage);
-            }
-            var model = new CartModel()
-            {
-                UserId = cart.UserId,
-                Sum = cart.Sum,
-                Purchases = cart.Purchases.Select(x => new PurchaseModel(
-                    x.Id,
-                    x.Title,
-                    x.Size,
-                    Convert.ToBase64String(x.Image),
-                    x.Quantity,
-                    x.UnitPrice,
-                    x.CartId))
-            };
-
-            return model;
+            return await repository.AllReadonly<Cart>()
+                .Where(x => x.UserId == userId)
+                .Select(x => new PurchaseModel(
+                    x.Purchase.Id,
+                    x.Purchase.Title,
+                    x.Purchase.Size,
+                    Convert.ToBase64String(x.Purchase.Image),
+                    x.Purchase.Quantity,
+                    x.Purchase.UnitPrice,
+                    x.UserId))
+                .ToListAsync();                
         }
     }
 }
