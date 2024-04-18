@@ -67,7 +67,6 @@ namespace BellaVitaPizzeria.Core.Services
             }
 
             await repository.SaveChangesAsync();
-
         }
 
         public async Task DeleteAsync(int id)
@@ -184,6 +183,31 @@ namespace BellaVitaPizzeria.Core.Services
                 .Take(ValidationConstants.MaxProductsPerPage);
 
             model.CurrentPage = currentPage;
+
+            return model;
+        }
+
+        public async Task<CartModel> GetPurchases(string cartId)
+        {
+            var cart = await repository.GetByIdAsync<Cart>(cartId);
+
+            if (cart == null) 
+            {
+                throw new ArgumentException(ErrorMessagesConstants.OperationFailedErrorMessage);
+            }
+            var model = new CartModel()
+            {
+                UserId = cart.UserId,
+                Sum = cart.Sum,
+                Purchases = cart.Purchases.Select(x => new PurchaseModel(
+                    x.Id,
+                    x.Title,
+                    x.Size,
+                    Convert.ToBase64String(x.Image),
+                    x.Quantity,
+                    x.UnitPrice,
+                    x.CartId))
+            };
 
             return model;
         }
