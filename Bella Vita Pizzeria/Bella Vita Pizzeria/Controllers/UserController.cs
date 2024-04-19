@@ -71,5 +71,13 @@ namespace Bella_Vita_Pizzeria.Controllers
 
             return View(model);
         }
+
+        [HttpGet]
+        public async Task<IActionResult> DecreaseQuantity(int id) 
+        {
+            await cartService.MinusQuantityAsync(id);
+
+            return RedirectToAction(nameof(Cart));
+        }
     }
 }

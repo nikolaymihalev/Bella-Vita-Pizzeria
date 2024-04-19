@@ -55,5 +55,21 @@ namespace BellaVitaPizzeria.Core.Services
                     x.UserId))
                 .ToListAsync();
         }
+
+        public async Task MinusQuantityAsync(int id)
+        {
+            var purchase = await repository.GetByIdAsync<Purchase>(id);
+
+            if (purchase != null) 
+            {
+                if (purchase.Quantity > 1) 
+                {
+                    purchase.Quantity--;
+
+                    await repository.SaveChangesAsync();
+                }
+                
+            }
+        }
     }
 }
