@@ -15,7 +15,7 @@ namespace Bella_Vita_Pizzeria.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> AddToCart(int productId, string size, double price) 
+        public async Task<IActionResult> AddToCart(int productId, string size) 
         {
             var product = await productService.GetByIdAsync(productId);
 
@@ -23,6 +23,22 @@ namespace Bella_Vita_Pizzeria.Controllers
             {
                 return BadRequest();
             }
+
+            double price = 0;
+
+            if (size == product.MinimumSize) 
+            {
+                price = product.MinimumPrice;
+            }
+            else if (size == product.MiddleSize)
+            {
+                price = product.MiddlePrice;
+            }
+            else if (size == product.MaxmimumSize)
+            {
+                price = product.MaximumPrice;
+            }
+
 
             var model = new PurchaseModel(0,
                 product.Title,

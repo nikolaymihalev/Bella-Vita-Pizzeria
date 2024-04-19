@@ -1,4 +1,5 @@
-﻿@model ProductInfoModel
+﻿@using System.Globalization
+@model ProductInfoModel
 @{
     ViewBag.Title = Model.Title;
 }
@@ -30,19 +31,27 @@
                 <div class="col">
                     <h3>@Model.Title</h3><br>                    
                     <p class="mb-0">@Model.Description</p><br>
-                    <p class="lh-lg mb-0"><span class="fw-bold">Small(@Model.MinimumSize)</span>...........................................<span class="fw-bold" style="color:red">@Model.MinimumPrice lv.</span> <a asp-controller="User" asp-action="AddToCart" asp-route-productId="@Model.Id" asp-route-size="@Model.MinimumSize" asp-route-price="@Model.MinimumPrice" class="btn btn-danger">Buy</a></p><br>
-                    
-                    @if (Model.MiddleSize != null && string.IsNullOrEmpty(Model.MiddleSize) == false && Model.MiddleSize!="")
-                    {
-                        <p class="lh-lg mb-0"><span class="fw-bold">Middle(@Model.MiddleSize)</span>...........................................<span class="fw-bold" style="color:red">@Model.MiddlePrice lv.</span> <a asp-controller="User" asp-action="AddToCart" asp-route-productId="@Model.Id" asp-route-size="@Model.MiddleSize" asp-route-price="@Model.MiddlePrice" class="btn btn-danger">Buy</a></p>
 
-                        <br>
-                    }
+                    @{
+                        if (Model.MiddleSize != null && string.IsNullOrEmpty(Model.MiddleSize) == false && Model.MiddleSize != "")
+                        {
+                            <p class="lh-lg mb-0"><span class="fw-bold">Small(@Model.MinimumSize)</span>...........................................<span class="fw-bold" style="color:red">@Model.MinimumPrice lv.</span> <a asp-controller="User" asp-action="AddToCart" asp-route-productId="@Model.Id" asp-route-size="@Model.MinimumSize" class="btn btn-danger">Buy</a></p>
 
-                    @if (Model.MaxmimumSize != null && string.IsNullOrEmpty(Model.MaxmimumSize) == false && Model.MaxmimumSize != "")
-                    {
-                        <p class="lh-lg mb-0"><span class="fw-bold">Family(@Model.MaxmimumSize)</span>...........................................<span class="fw-bold" style="color:red">@Model.MaximumPrice lv.</span> <a asp-controller="User" asp-action="AddToCart" asp-route-productId="@Model.Id" asp-route-size="@Model.MaxmimumSize" asp-route-price="@Model.MaximumPrice" class="btn btn-danger">Buy</a></p>
-                        <br>
+                            <br>
+
+                            <p class="lh-lg mb-0"><span class="fw-bold">Middle(@Model.MiddleSize)</span>...........................................<span class="fw-bold" style="color:red">@Model.MiddlePrice lv.</span> <a asp-controller="User" asp-action="AddToCart" asp-route-productId="@Model.Id" asp-route-size="@Model.MiddleSize" class="btn btn-danger">Buy</a></p>
+
+                            <br>
+
+                            <p class="lh-lg mb-0"><span class="fw-bold">Family(@Model.MaxmimumSize)</span>...........................................<span class="fw-bold" style="color:red">@Model.MaximumPrice lv.</span> <a asp-controller="User" asp-action="AddToCart" asp-route-productId="@Model.Id" asp-route-size="@Model.MaxmimumSize" class="btn btn-danger">Buy</a></p>
+                            <br>
+                        }
+                        else
+                        {
+                            <p class="lh-lg mb-0"><span class="fw-bold">@Model.MinimumSize</span>...........................................<span class="fw-bold" style="color:red">@Model.MinimumPrice lv.</span> <a asp-controller="User" asp-action="AddToCart" asp-route-productId="@Model.Id" asp-route-size="@Model.MinimumSize" class="btn btn-danger">Buy</a></p>
+
+                            <br>
+                        }
                     }
                 </div>                
             </div>            
