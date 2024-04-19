@@ -73,9 +73,9 @@ namespace Bella_Vita_Pizzeria.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> DecreaseQuantity(int id) 
+        public async Task<IActionResult> ChangeQuantity(int id,string operation) 
         {
-            await cartService.MinusQuantityAsync(id);
+            await cartService.ChangeQuantityAsync(id, operation);
 
             return RedirectToAction(nameof(Cart));
         }

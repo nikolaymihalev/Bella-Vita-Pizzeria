@@ -24,9 +24,9 @@
                 </td>
                 <td>@list[i].UnitPrice lv.</td>
                 <td>
-                    <a asp-controller="User" asp-action="DecreaseQuantity" asp-route-id="@list[i].Id" class="btn btn-secondary">-</a>
+                    <a asp-controller="User" asp-action="ChangeQuantity" asp-route-id="@list[i].Id" asp-route-operation="-" class="btn btn-secondary">-</a>
                     @list[i].Quantity
-                    <a asp-controller="User" asp-action="" class="btn btn-secondary">+</a>
+                    <a asp-controller="User" asp-action="ChangeQuantity" asp-route-id="@list[i].Id" asp-route-operation="+" class="btn btn-secondary">+</a>
                 </td>
                 <td>@list[i].Sum lv.</td>
                 <td>
