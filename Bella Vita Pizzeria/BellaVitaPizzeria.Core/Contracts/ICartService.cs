@@ -7,5 +7,6 @@ namespace BellaVitaPizzeria.Core.Contracts
         Task AddToCartAsync(PurchaseModel model);
         Task<IEnumerable<PurchaseModel>> GetPurchasesAsync(string userId);
         Task ChangeQuantityAsync(int id, string operation);
+        Task DeletePurchaseAsync(int id, string userId);
     }
 }

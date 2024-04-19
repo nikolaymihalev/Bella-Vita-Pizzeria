@@ -8,7 +8,8 @@
 <table id="printTable" class="table table-bordered table-striped">
     <tr>
         <th scope="col">Products</th>
-        <th scope="col">Unit Price</th>
+        <th scope="col">Size</th>
+        <th scope="col">Un. Price</th>
         <th scope="col">Quantity</th>
         <th scope="col">Sum</th>
     </tr>
@@ -22,6 +23,7 @@
                     <img class="card-img-top" src="data:image/png;base64,@list[i].Image" alt="Image" style="width: 150px; height: 100px;"> 
                     @list[i].Title
                 </td>
+                <td>@list[i].Size</td>
                 <td>@list[i].UnitPrice lv.</td>
                 <td>
                     <a asp-controller="User" asp-action="ChangeQuantity" asp-route-id="@list[i].Id" asp-route-operation="-" class="btn btn-secondary">-</a>
@@ -30,7 +32,7 @@
                 </td>
                 <td>@list[i].Sum lv.</td>
                 <td>
-                    <a class="btn btn-danger">
+                    <a asp-controller="User" asp-action="DeletePurchase" asp-route-id="@list[i].Id" class="btn btn-danger">
                         <img src="~/images/bin.png" alt="Bin" style="width: 20px; height: 20px;" />
                     </a>
                 </td>
