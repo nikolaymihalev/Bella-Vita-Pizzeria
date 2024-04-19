@@ -49,7 +49,8 @@ namespace BellaVitaPizzeria.Core.Services
 
             if (cart != null)
             {
-                cart.Purchase.Quantity++;
+                var purchase = await repository.GetByIdAsync<Purchase>(cart.PurchaseId);
+                purchase.Quantity++;
             }
             else 
             {

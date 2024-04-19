@@ -11,11 +11,6 @@
     @if (SignInManager.IsSignedIn(User))
     {
     <li class="nav-item">
-        <a class="nav-link text-dark" asp-action="" asp-controller="">
-            <img src="~/images/magnifier.png" style="width: 30px; height: 30px" />
-        </a>
-    </li>
-    <li class="nav-item">
         <a class="nav-link text-dark" asp-action="MyFavoriteProducts" asp-controller="FavoriteProduct">
             <img src="~/images/heart.png" style="width: 30px; height: 30px"/>
         </a>
