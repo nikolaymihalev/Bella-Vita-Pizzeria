@@ -8,10 +8,14 @@ namespace Bella_Vita_Pizzeria.Controllers
     public class UserController : BaseController
     {
         private readonly IProductService productService;
+        private readonly ICartService cartService;
 
-        public UserController(IProductService _productService)
+        public UserController(
+            IProductService _productService,
+            ICartService _cartService)
         {
             productService = _productService;
+            cartService = _cartService;
         }
 
         [HttpGet]
@@ -50,7 +54,7 @@ namespace Bella_Vita_Pizzeria.Controllers
 
             try
             {
-                await productService.AddToCartAsync(model);
+                await cartService.AddToCartAsync(model);
 
                 return RedirectToAction(nameof(Cart));
             }
@@ -63,7 +67,7 @@ namespace Bella_Vita_Pizzeria.Controllers
         [HttpGet]
         public async Task<IActionResult> Cart()
         {
-            var model = await productService.GetPurchasesAsync(User.Id());
+            var model = await cartService.GetPurchasesAsync(User.Id());
 
             return View(model);
         }

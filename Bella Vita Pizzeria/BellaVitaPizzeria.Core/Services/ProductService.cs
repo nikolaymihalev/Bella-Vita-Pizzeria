@@ -42,33 +42,6 @@ namespace BellaVitaPizzeria.Core.Services
             }
         }
 
-        public async Task AddToCartAsync(PurchaseModel model)
-        {
-            var cart = repository.AllReadonly<Cart>()
-                .FirstOrDefault(x => x.UserId == model.UserId && x.Purchase.Title == model.Title && x.Purchase.Size == model.Size);
-
-            if (cart != null)
-            {
-                var purchase = await repository.GetByIdAsync<Purchase>(cart.PurchaseId);
-                purchase.Quantity++;
-            }
-            else 
-            {
-                var purchase = new Purchase()
-                {
-                    Title = model.Title,
-                    Size = model.Size,
-                    Quantity = 1,
-                    Image = Convert.FromBase64String(model.Image),
-                    UnitPrice = model.UnitPrice,
-                };
-                await repository.AddAsync<Purchase>(purchase);
-                await repository.AddAsync<Cart>(new Cart() { UserId = model.UserId, Purchase = purchase });
-            }
-
-            await repository.SaveChangesAsync();
-        }
-
         public async Task DeleteAsync(int id)
         {
             var product = await repository.GetByIdAsync<Product>(id);
@@ -185,21 +158,6 @@ namespace BellaVitaPizzeria.Core.Services
             model.CurrentPage = currentPage;
 
             return model;
-        }
-
-        public async Task<IEnumerable<PurchaseModel>> GetPurchasesAsync(string userId)
-        {
-            return await repository.AllReadonly<Cart>()
-                .Where(x => x.UserId == userId)
-                .Select(x => new PurchaseModel(
-                    x.Purchase.Id,
-                    x.Purchase.Title,
-                    x.Purchase.Size,
-                    Convert.ToBase64String(x.Purchase.Image),
-                    x.Purchase.Quantity,
-                    x.Purchase.UnitPrice,
-                    x.UserId))
-                .ToListAsync();                
         }
     }
 }
