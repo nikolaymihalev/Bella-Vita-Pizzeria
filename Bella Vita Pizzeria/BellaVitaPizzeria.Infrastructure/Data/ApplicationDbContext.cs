@@ -29,6 +29,7 @@ namespace Bella_Vita_Pizzeria.Data
             builder.ApplyConfiguration(new RatingConfiguration());
             builder.ApplyConfiguration(new PurchaseConfiguration());
             builder.ApplyConfiguration(new CartConfiguration());
+            builder.ApplyConfiguration(new OrderConfiguration());
 
             base.OnModelCreating(builder);
         }

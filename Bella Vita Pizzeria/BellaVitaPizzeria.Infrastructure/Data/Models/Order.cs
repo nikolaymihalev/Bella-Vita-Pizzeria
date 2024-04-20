@@ -1,4 +1,5 @@
-﻿using BellaVitaPizzeria.Infrastructure.Constants;
+﻿using Azure;
+using BellaVitaPizzeria.Infrastructure.Constants;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using System.ComponentModel.DataAnnotations;
@@ -9,6 +10,8 @@ namespace BellaVitaPizzeria.Infrastructure.Data.Models
     [Comment("Client's order")]
     public class Order
     {
+        private List<int> _purchasesIds;
+
         [Comment("Order identifier")]
         [Key]
         public int Id { get; set; }
@@ -52,5 +55,8 @@ namespace BellaVitaPizzeria.Infrastructure.Data.Models
 
         [ForeignKey(nameof(UserId))]
         public IdentityUser User { get; set; }
+
+        public IEnumerable<int> PurchasesIds => _purchasesIds;
+        public void AddTag(params int[] purchasesIds) => _purchasesIds = new List<int>(_purchasesIds.Union(purchasesIds));
     }
 }
