@@ -145,5 +145,22 @@ namespace BellaVitaPizzeria.Core.Services
                 }
             }            
         }
+
+        public async Task DeleteOrderAsync(int id)
+        {
+            var order = await repository.GetByIdAsync<Order>(id);
+
+            if (order != null) 
+            {
+                foreach (var purchaseId in order.PurchasesIds) 
+                {
+                    await repository.DeleteAsync<Purchase>(purchaseId);
+                }
+
+                await repository.DeleteAsync<Order>(id);
+
+                await repository.SaveChangesAsync();
+            }
+        }
     }
 }
