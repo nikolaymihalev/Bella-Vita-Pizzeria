@@ -57,6 +57,6 @@ namespace BellaVitaPizzeria.Infrastructure.Data.Models
         public IdentityUser User { get; set; }
 
         public IEnumerable<int> PurchasesIds => _purchasesIds;
-        public void AddTag(params int[] purchasesIds) => _purchasesIds = new List<int>(_purchasesIds.Union(purchasesIds));
+        public void AddPurchase(params int[] purchasesIds) => _purchasesIds = new List<int>(_purchasesIds.Union(purchasesIds));
     }
 }

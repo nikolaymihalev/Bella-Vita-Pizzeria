@@ -99,28 +99,43 @@ namespace BellaVitaPizzeria.Core.Services
 
         public async Task AddOrderAsync(OrderFormModel model)
         {
-            var order = new Order()
-            {
-                FirstName = model.FirstName,
-                LastName = model.LastName,
-                Email = model.Email,
-                PhoneNumber = model.PhoneNumber,
-                Town = model.Town,
-                Street = model.Street,
-                Comment = model.Comment,
-                UserId = model.UserId
-            };
+            var purchases = await repository.AllReadonly<Cart>()
+                .Where(x => x.UserId == model.UserId).ToListAsync();
 
-            try
+            if (purchases.Any()) 
             {
-                await repository.AddAsync<Order>(order);                
+                var purchasesIds = purchases.Select(x => x.PurchaseId).ToArray();
 
-                await repository.SaveChangesAsync();
-            }
-            catch (Exception)
-            {
-                throw new ApplicationException(ErrorMessagesConstants.OperationFailedErrorMessage);
-            }
+                var order = new Order()
+                {
+                    FirstName = model.FirstName,
+                    LastName = model.LastName,
+                    Email = model.Email,
+                    PhoneNumber = model.PhoneNumber,
+                    Town = model.Town,
+                    Street = model.Street,
+                    Comment = model.Comment,
+                    UserId = model.UserId
+                };
+
+                order.AddPurchase(purchasesIds);
+
+                try
+                {
+                    await repository.AddAsync<Order>(order);
+
+                    for (int i = 0; i < purchases.Count(); i++)
+                    {
+                        repository.Delete<Cart>(purchases[i]);
+                    }
+
+                    await repository.SaveChangesAsync();
+                }
+                catch (Exception)
+                {
+                    throw new ApplicationException(ErrorMessagesConstants.OperationFailedErrorMessage);
+                }
+            }            
         }
     }
 }

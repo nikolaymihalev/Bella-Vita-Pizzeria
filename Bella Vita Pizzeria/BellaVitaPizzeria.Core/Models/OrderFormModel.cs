@@ -46,5 +46,7 @@ namespace BellaVitaPizzeria.Core.Models
         public string Comment { get; set; } = string.Empty;
 
         public string UserId { get; set; } = string.Empty;
+
+        public IEnumerable<int> PurchasesIds { get; set; } = new List<int>();
     }
 }
