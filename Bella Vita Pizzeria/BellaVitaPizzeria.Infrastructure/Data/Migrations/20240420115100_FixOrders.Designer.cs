@@ -4,6 +4,7 @@ using Bella_Vita_Pizzeria.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Bella_Vita_Pizzeria.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240420115100_FixOrders")]
+    partial class FixOrders
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -133,14 +136,14 @@ namespace Bella_Vita_Pizzeria.Data.Migrations
 
                     b.Property<string>("FirstName")
                         .IsRequired()
-                        .HasMaxLength(150)
-                        .HasColumnType("nvarchar(150)")
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)")
                         .HasComment("Client's first name");
 
                     b.Property<string>("LastName")
                         .IsRequired()
-                        .HasMaxLength(150)
-                        .HasColumnType("nvarchar(150)")
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)")
                         .HasComment("Client's last name");
 
                     b.Property<string>("PhoneNumber")
@@ -476,15 +479,15 @@ namespace Bella_Vita_Pizzeria.Data.Migrations
                         {
                             Id = "1e22d31e-db95-4032-9165-2ccaa4865169",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "b5a77d81-caa7-4da5-a492-15a1fb531ba0",
+                            ConcurrencyStamp = "ac3a39e0-4b58-4fd7-b042-a8fe42a431ee",
                             Email = "buyer@gmail.com",
                             EmailConfirmed = false,
                             LockoutEnabled = false,
                             NormalizedEmail = "buyer@gmail.com",
                             NormalizedUserName = "buyer@gmail.com",
-                            PasswordHash = "AQAAAAIAAYagAAAAECwFY5tiGHTOoa9PP+NB+H3I5XZqgmja6TYAxbgCSPW+o4qKhKSHkWYwrwe3TxOnsQ==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEE/1oaMaxYHq422/I7tYyzGJgjB3YdHo4PoKlkh9AFD9qqE7+CvK7bYRWTOvrAwzFw==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "f489d830-6968-4d93-97bb-8664c809c1a5",
+                            SecurityStamp = "6207879e-8442-4c20-881d-d61e997db4eb",
                             TwoFactorEnabled = false,
                             UserName = "buyer@gmail.com"
                         },
@@ -492,15 +495,15 @@ namespace Bella_Vita_Pizzeria.Data.Migrations
                         {
                             Id = "11804d9d-ab49-4440-936e-7b76cafe3ec1",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "40f4b634-ea36-4eb1-8056-84d031359f2c",
+                            ConcurrencyStamp = "aec84f57-dad0-4c14-80d1-f326c27cf5d5",
                             Email = "guest@gmail.com",
                             EmailConfirmed = false,
                             LockoutEnabled = false,
                             NormalizedEmail = "guest@gmail.com",
                             NormalizedUserName = "guest@gmail.com",
-                            PasswordHash = "AQAAAAIAAYagAAAAEGhlX5IaGYwp/sri4nVlt51NN8mRAr57CxSOJdQUcK+fHQm6weeL/XSoRK1ox3nvRg==",
+                            PasswordHash = "AQAAAAIAAYagAAAAECr1cljkGcG7cwlMLpIvHIKYRZA4OHObOUUTNlycwOpiZ6H06Rsbx14zlf29sCE3Sw==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "013269ef-389f-45f9-8ed9-1b35837632b3",
+                            SecurityStamp = "3cc242df-2bb9-4f74-a52b-793bb559f23a",
                             TwoFactorEnabled = false,
                             UserName = "guest@gmail.com"
                         });

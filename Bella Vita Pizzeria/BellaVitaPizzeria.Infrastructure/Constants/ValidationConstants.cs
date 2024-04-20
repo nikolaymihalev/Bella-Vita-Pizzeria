@@ -15,5 +15,20 @@
         public const int ProductMaxRating = 5;
 
         public const int MaxProductsPerPage = 10;
+
+        public const int ClientNameMaxLength = 150;
+        public const int ClientNameMinLength = 2;
+
+        public const int ClientEmailMaxLength = 200;
+        public const int ClientEmailMinLength = 5;
+
+        public const int ClientPhoneNumberMaxLength = 20;
+        public const int ClientPhoneNumberMinLength = 5;
+
+        public const int ClientTownMaxLength = 50;
+        public const int ClientTownMinLength = 2;
+
+        public const int ClientStreetMaxLength = 80;
+        public const int ClientStreetMinLength = 3;
     }
 }

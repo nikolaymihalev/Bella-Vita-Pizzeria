@@ -1,6 +1,7 @@
 ﻿using BellaVitaPizzeria.Core.Contracts;
 using BellaVitaPizzeria.Core.Models;
 using BellaVitaPizzeria.Infrastructure.Common;
+using BellaVitaPizzeria.Infrastructure.Constants;
 using BellaVitaPizzeria.Infrastructure.Data.Models;
 using Microsoft.EntityFrameworkCore;
 
@@ -93,6 +94,32 @@ namespace BellaVitaPizzeria.Core.Services
 
                     await repository.SaveChangesAsync();
                 }
+            }
+        }
+
+        public async Task AddOrderAsync(OrderFormModel model)
+        {
+            var order = new Order()
+            {
+                FirstName = model.FirstName,
+                LastName = model.LastName,
+                Email = model.Email,
+                PhoneNumber = model.PhoneNumber,
+                Town = model.Town,
+                Street = model.Street,
+                Comment = model.Comment,
+                UserId = model.UserId
+            };
+
+            try
+            {
+                await repository.AddAsync<Order>(order);                
+
+                await repository.SaveChangesAsync();
+            }
+            catch (Exception)
+            {
+                throw new ApplicationException(ErrorMessagesConstants.OperationFailedErrorMessage);
             }
         }
     }
