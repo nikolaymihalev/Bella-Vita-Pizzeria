@@ -11,7 +11,7 @@ namespace BellaVitaPizzeria.Infrastructure.Data.Configurations
         {
             var converter = new ValueConverter<IEnumerable<int>, string>(
                 v => string.Join(";", v),
-                v => v.Split(";", StringSplitOptions.RemoveEmptyEntries).Select(val => int.Parse(val)).ToArray());
+                v => v.Split(";", StringSplitOptions.RemoveEmptyEntries).Select(val => int.Parse(val)).ToList().AsEnumerable());
 
             builder.Property(e => e.PurchasesIds)
                     .HasConversion(converter);
