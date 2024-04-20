@@ -10,7 +10,7 @@ namespace BellaVitaPizzeria.Infrastructure.Data.Models
     [Comment("Client's order")]
     public class Order
     {
-        private List<int> _purchasesIds;
+        private List<int> _purchasesIds = new List<int>();
 
         [Comment("Order identifier")]
         [Key]
@@ -56,7 +56,11 @@ namespace BellaVitaPizzeria.Infrastructure.Data.Models
         [ForeignKey(nameof(UserId))]
         public IdentityUser User { get; set; }
 
+        [Comment("Purchases total sum")]
+        [Required]
+        public double TotalSum { get; set; }
+
         public IEnumerable<int> PurchasesIds => _purchasesIds;
-        public void AddPurchase(params int[] purchasesIds) => _purchasesIds = new List<int>(_purchasesIds.Union(purchasesIds));
+        public void AddPurchases(int[] purchasesIds) => _purchasesIds = new List<int>(_purchasesIds.Union(purchasesIds));
     }
 }

@@ -11,12 +11,14 @@ namespace BellaVitaPizzeria.Core.Models
             MinimumLength = ValidationConstants.ClientNameMinLength, 
             ErrorMessage = ErrorMessagesConstants.StringLengthErrorMessage)]
         [Required(ErrorMessage = ErrorMessagesConstants.RequireErrorMessage)]
+        [Display(Name = "First Name")]
         public string FirstName { get; set; } = string.Empty;
 
         [StringLength(ValidationConstants.ClientNameMaxLength,
             MinimumLength = ValidationConstants.ClientNameMinLength,
             ErrorMessage = ErrorMessagesConstants.StringLengthErrorMessage)]
         [Required(ErrorMessage = ErrorMessagesConstants.RequireErrorMessage)]
+        [Display(Name = "Last Name")]
         public string LastName { get; set; } = string.Empty;
 
         [StringLength(ValidationConstants.ClientEmailMaxLength,
@@ -29,6 +31,7 @@ namespace BellaVitaPizzeria.Core.Models
             MinimumLength = ValidationConstants.ClientPhoneNumberMinLength,
             ErrorMessage = ErrorMessagesConstants.StringLengthErrorMessage)]
         [Required(ErrorMessage = ErrorMessagesConstants.RequireErrorMessage)]
+        [Display(Name = "Phone Number")]
         public string PhoneNumber { get; set; } = string.Empty;
 
         [StringLength(ValidationConstants.ClientTownMaxLength,
@@ -46,6 +49,8 @@ namespace BellaVitaPizzeria.Core.Models
         public string Comment { get; set; } = string.Empty;
 
         public string UserId { get; set; } = string.Empty;
+
+        public double TotalSum { get; set; }
 
         public IEnumerable<int> PurchasesIds { get; set; } = new List<int>();
     }

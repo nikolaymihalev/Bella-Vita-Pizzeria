@@ -115,10 +115,18 @@ namespace BellaVitaPizzeria.Core.Services
                     Town = model.Town,
                     Street = model.Street,
                     Comment = model.Comment,
-                    UserId = model.UserId
+                    UserId = model.UserId,
                 };
 
-                order.AddPurchase(purchasesIds);
+                order.AddPurchases(purchasesIds);
+
+                foreach (var item in purchases) 
+                {
+                    var purchase = await repository.GetByIdAsync<Purchase>(item.PurchaseId);
+
+                    if(purchase != null)
+                        order.TotalSum += purchase.Sum;
+                }
 
                 try
                 {

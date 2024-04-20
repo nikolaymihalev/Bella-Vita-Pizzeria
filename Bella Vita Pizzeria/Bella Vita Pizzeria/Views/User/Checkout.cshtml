@@ -1,0 +1,59 @@
+﻿@model OrderFormModel
+@{
+    ViewBag.Title = "Order";
+}
+
+<partial name="_PageBannerPartial" model="@ViewBag.Title" />
+
+<form asp-controller="User" asp-action="Checkout" method="post" enctype="multipart/form-data">
+    <input type="hidden" asp-for="@Model.Id" />
+    <div class="form-group">
+        <label asp-for="FirstName"></label>
+        <input asp-for="FirstName" class="form-control" placeholder="Ivan...">
+        <span asp-validation-for="FirstName" class="small text-danger"></span>
+    </div>
+    <br />
+    <div class="form-group">
+        <label asp-for="LastName"></label>
+        <textarea asp-for="LastName" rows="4" class="form-control" placeholder="Ivanov..."></textarea>
+        <span asp-validation-for="LastName" class="small text-danger"></span>
+    </div>
+    <br />
+    <div class="form-group">
+        <label asp-for="Email"></label>
+        <textarea asp-for="Email" rows="4" class="form-control" placeholder="ivanivanov@gmail.com..."></textarea>
+        <span asp-validation-for="Email" class="small text-danger"></span>
+    </div>
+    <br />
+    <div class="form-group">
+        <label asp-for="PhoneNumber"></label>
+        <textarea asp-for="PhoneNumber" rows="4" class="form-control" placeholder="0891234..."></textarea>
+        <span asp-validation-for="PhoneNumber" class="small text-danger"></span>
+    </div>
+    <br />
+    <div class="form-group">
+        <label asp-for="Town"></label>
+        <textarea asp-for="Town" rows="4" class="form-control" placeholder="Sofia..."></textarea>
+        <span asp-validation-for="Town" class="small text-danger"></span>
+    </div>
+    <br />
+    <div class="form-group">
+        <label asp-for="Street"></label>
+        <textarea asp-for="Street" rows="4" class="form-control" placeholder="Karnobatska 9..."></textarea>
+        <span asp-validation-for="Street" class="small text-danger"></span>
+    </div>
+    <br />
+    <div class="form-group">
+        <label asp-for="Comment"></label>
+        <textarea asp-for="Comment" rows="4" class="form-control"></textarea>
+    </div>
+    <br />
+
+    <div class="text-center">
+        <input class="btn btn-danger mt-3" type="submit" value="Order Completion" />
+    </div>
+</form>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

@@ -87,5 +87,28 @@ namespace Bella_Vita_Pizzeria.Controllers
 
             return RedirectToAction(nameof(Cart));
         }
+
+        [HttpGet]
+        public async Task<IActionResult> Checkout() 
+        {
+            var model = new OrderFormModel();
+
+            return View(model);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Checkout(OrderFormModel model)
+        {
+            if (!ModelState.IsValid) 
+            {
+                return View(model);
+            }
+
+            model.UserId = User.Id();
+
+            await cartService.AddOrderAsync(model);
+
+            return RedirectToAction(nameof(Cart));
+        }
     }
 }

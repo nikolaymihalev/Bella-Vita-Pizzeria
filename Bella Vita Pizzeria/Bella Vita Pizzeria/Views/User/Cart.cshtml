@@ -40,3 +40,23 @@
         }
     }
 </table>
+
+<div class="text-end">
+    @{
+        double totalSum=0;
+
+        if (Model != null)
+        {
+            foreach(var item in Model)
+            {
+                totalSum += item.Sum;
+            }
+        }        
+    }  
+    <h5>
+       Total @totalSum lv.
+    </h5>
+    <a asp-controller="User" asp-action="Checkout" class="btn btn-danger">
+        Proceed to checkout
+    </a>
+</div>
