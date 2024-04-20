@@ -18,6 +18,7 @@ namespace Bella_Vita_Pizzeria.Data
         public DbSet<Rating> Ratings { get; set; } = null!;
         public DbSet<Purchase> Purchases { get; set; } = null!;
         public DbSet<Cart> Carts { get; set; } = null!;
+        public DbSet<Order> Orders { get; set; } = null!;
 
         protected override void OnModelCreating(ModelBuilder builder)
         {
