@@ -1,5 +1,6 @@
 ﻿using BellaVitaPizzeria.Core.Contracts;
 using BellaVitaPizzeria.Core.Models;
+using BellaVitaPizzeria.Core.Models.Cart;
 using Microsoft.AspNetCore.Mvc;
 using System.Security.Claims;
 

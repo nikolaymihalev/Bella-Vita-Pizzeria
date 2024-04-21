@@ -1,4 +1,4 @@
-﻿using BellaVitaPizzeria.Core.Models;
+﻿using BellaVitaPizzeria.Core.Models.Rating;
 
 namespace BellaVitaPizzeria.Core.Contracts
 {

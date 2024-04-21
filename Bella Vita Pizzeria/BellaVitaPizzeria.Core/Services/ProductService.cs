@@ -1,5 +1,5 @@
 ﻿using BellaVitaPizzeria.Core.Contracts;
-using BellaVitaPizzeria.Core.Models;
+using BellaVitaPizzeria.Core.Models.Product;
 using BellaVitaPizzeria.Infrastructure.Common;
 using BellaVitaPizzeria.Infrastructure.Constants;
 using BellaVitaPizzeria.Infrastructure.Data.Models;

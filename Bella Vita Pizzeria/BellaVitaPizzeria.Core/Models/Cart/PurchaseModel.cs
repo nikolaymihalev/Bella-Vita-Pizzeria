@@ -1,4 +1,4 @@
-﻿namespace BellaVitaPizzeria.Core.Models
+﻿namespace BellaVitaPizzeria.Core.Models.Cart
 {
     public class PurchaseModel
     {
@@ -26,6 +26,6 @@
         public int Quantity { get; set; }
         public double UnitPrice { get; set; }
         public double Sum => UnitPrice * Quantity;
-        public string UserId { get; set; } 
+        public string UserId { get; set; }
     }
 }

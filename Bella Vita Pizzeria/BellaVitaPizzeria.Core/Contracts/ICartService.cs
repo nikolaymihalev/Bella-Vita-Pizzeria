@@ -1,4 +1,4 @@
-﻿using BellaVitaPizzeria.Core.Models;
+﻿using BellaVitaPizzeria.Core.Models.Cart;
 
 namespace BellaVitaPizzeria.Core.Contracts
 {

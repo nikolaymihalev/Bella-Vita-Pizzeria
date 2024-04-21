@@ -1,8 +1,9 @@
-﻿using BellaVitaPizzeria.Infrastructure.Constants;
+﻿using BellaVitaPizzeria.Core.Models.Category;
+using BellaVitaPizzeria.Infrastructure.Constants;
 using Microsoft.AspNetCore.Http;
 using System.ComponentModel.DataAnnotations;
 
-namespace BellaVitaPizzeria.Core.Models
+namespace BellaVitaPizzeria.Core.Models.Product
 {
     public class ProductFormModel
     {

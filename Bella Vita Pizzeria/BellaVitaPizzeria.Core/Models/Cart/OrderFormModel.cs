@@ -1,14 +1,14 @@
 ﻿using BellaVitaPizzeria.Infrastructure.Constants;
 using System.ComponentModel.DataAnnotations;
 
-namespace BellaVitaPizzeria.Core.Models
+namespace BellaVitaPizzeria.Core.Models.Cart
 {
     public class OrderFormModel
     {
         public int Id { get; set; }
 
-        [StringLength(ValidationConstants.ClientNameMaxLength, 
-            MinimumLength = ValidationConstants.ClientNameMinLength, 
+        [StringLength(ValidationConstants.ClientNameMaxLength,
+            MinimumLength = ValidationConstants.ClientNameMinLength,
             ErrorMessage = ErrorMessagesConstants.StringLengthErrorMessage)]
         [Required(ErrorMessage = ErrorMessagesConstants.RequireErrorMessage)]
         [Display(Name = "First Name")]

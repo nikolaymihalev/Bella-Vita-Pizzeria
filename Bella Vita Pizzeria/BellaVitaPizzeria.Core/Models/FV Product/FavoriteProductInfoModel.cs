@@ -1,4 +1,6 @@
-﻿namespace BellaVitaPizzeria.Core.Models
+﻿using BellaVitaPizzeria.Core.Models.Product;
+
+namespace BellaVitaPizzeria.Core.Models
 {
     public class FavoriteProductInfoModel
     {

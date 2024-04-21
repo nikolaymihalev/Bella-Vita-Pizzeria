@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace BellaVitaPizzeria.Core.Models
+namespace BellaVitaPizzeria.Core.Models.Product
 {
     public class ProductInfoModel
     {
@@ -18,10 +18,10 @@ namespace BellaVitaPizzeria.Core.Models
             string middleSize,
             string maximumSize)
         {
-            Id = id; 
-            Title = title; 
+            Id = id;
+            Title = title;
             Description = description;
-            Image = image; 
+            Image = image;
             CategoryId = categoryId;
             CategoryName = categoryName;
             MinimumPrice = minimumPrice;
@@ -50,7 +50,7 @@ namespace BellaVitaPizzeria.Core.Models
 
         public double MaximumPrice { get; set; }
 
-        [Display(Name ="Small")]
+        [Display(Name = "Small")]
         public string MinimumSize { get; set; }
 
         [Display(Name = "Big")]

@@ -1,4 +1,4 @@
-﻿namespace BellaVitaPizzeria.Core.Models
+﻿namespace BellaVitaPizzeria.Core.Models.Product
 {
     public class ProductQueryModel
     {

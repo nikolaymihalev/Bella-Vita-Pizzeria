@@ -1,4 +1,4 @@
-﻿namespace BellaVitaPizzeria.Core.Models
+﻿namespace BellaVitaPizzeria.Core.Models.Rating
 {
     public class RatingInfoModel
     {
