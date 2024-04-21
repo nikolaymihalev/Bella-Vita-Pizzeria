@@ -24,7 +24,7 @@ namespace Bella_Vita_Pizzeria.Controllers
             return View();
         }
 
-        public IActionResult Privacy()
+        public IActionResult AboutUs()
         {
             return View();
         }
