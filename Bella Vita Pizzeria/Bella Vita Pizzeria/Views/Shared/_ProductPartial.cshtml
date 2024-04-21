@@ -3,26 +3,50 @@
 <input type="hidden" asp-for="@Model.Id" />
 <div class="form-group">
     <label asp-for="Title"></label>
-    <input asp-for="Title" class="form-control" placeholder="Burger...">
+    <input asp-for="Title" class="form-control">
     <span asp-validation-for="Title" class="small text-danger"></span>
 </div>
 <br />
 <div class="form-group">
     <label asp-for="Description"></label>
-    <textarea asp-for="Description" rows="4" class="form-control" placeholder="It's very tasty..."></textarea>
+    <textarea asp-for="Description" rows="4" class="form-control" ></textarea>
     <span asp-validation-for="Description" class="small text-danger"></span>
 </div>
 <br />
 <div class="form-group">
-    <label asp-for="MaximumSize"></label>
-    <textarea asp-for="MaximumSize" rows="4" class="form-control" placeholder="Yogurt - 100 g..."></textarea>
-    <span asp-validation-for="MaximumSize" class="small text-danger"></span>
+    <label asp-for="MinimumSize"></label>
+    <textarea asp-for="MinimumSize" rows="4" class="form-control" ></textarea>
+    <span asp-validation-for="MinimumSize" class="small text-danger"></span>
 </div>
 <br />
 <div class="form-group">
     <label asp-for="MinimumPrice"></label>
-    <textarea asp-for="MinimumPrice" rows="4" class="form-control" placeholder="Wash and cut the potatoes..."></textarea>
+    <textarea asp-for="MinimumPrice" rows="4" class="form-control"></textarea>
     <span asp-validation-for="MinimumPrice" class="small text-danger"></span>
+</div>
+<br />
+<div class="form-group">
+    <label asp-for="MiddleSize"></label>
+    <textarea asp-for="MiddleSize" rows="4" class="form-control"></textarea>
+    <span asp-validation-for="MiddleSize" class="small text-danger"></span>
+</div>
+<br />
+<div class="form-group">
+    <label asp-for="MiddlePrice"></label>
+    <textarea asp-for="MiddlePrice" rows="4" class="form-control"></textarea>
+    <span asp-validation-for="MiddlePrice" class="small text-danger"></span>
+</div>
+<br />
+<div class="form-group">
+    <label asp-for="MaximumSize"></label>
+    <textarea asp-for="MaximumSize" rows="4" class="form-control"></textarea>
+    <span asp-validation-for="MaximumSize" class="small text-danger"></span>
+</div>
+<br />
+<div class="form-group">
+    <label asp-for="MaximumPrice"></label>
+    <textarea asp-for="MaximumPrice" rows="4" class="form-control"></textarea>
+    <span asp-validation-for="MaximumPrice" class="small text-danger"></span>
 </div>
 <br />
 <div class="form-group">

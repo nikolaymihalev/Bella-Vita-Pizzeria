@@ -6,7 +6,8 @@ using System.Security.Claims;
 
 namespace Bella_Vita_Pizzeria.Controllers
 {
-    public class ProductController : BaseController
+    [Authorize(Roles = "Admin")]
+    public class ProductController : Controller
     {
         private readonly IProductService productService;
         private readonly ICategoryService categoryService;        
@@ -200,7 +201,5 @@ namespace Bella_Vita_Pizzeria.Controllers
 
             return RedirectToAction(nameof(AllProducts));
         }
-
-        
     }
 }

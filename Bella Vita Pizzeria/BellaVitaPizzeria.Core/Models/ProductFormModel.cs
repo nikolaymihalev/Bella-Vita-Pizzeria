@@ -23,20 +23,26 @@ namespace BellaVitaPizzeria.Core.Models
         public int CategoryId { get; set; }
 
         [Required(ErrorMessage = ErrorMessagesConstants.RequireErrorMessage)]
+        [Display(Name = "Price")]
         public double MinimumPrice { get; set; }
 
+        [Display(Name = "Price for middle size")]
         public double? MiddlePrice { get; set; }
 
+        [Display(Name = "Price for max size")]
         public double? MaximumPrice { get; set; }
 
         [Required(ErrorMessage = ErrorMessagesConstants.RequireErrorMessage)]
         [StringLength(ValidationConstants.ProductWeightMaxLength,
             MinimumLength = ValidationConstants.ProductWeightMinLength,
             ErrorMessage = ErrorMessagesConstants.StringLengthErrorMessage)]
+        [Display(Name = "Size")]
         public string MinimumSize { get; set; } = string.Empty;
 
+        [Display(Name = "Middle size")]
         public string? MiddleSize { get; set; }
 
+        [Display(Name = "Max size")]
         public string? MaximumSize { get; set; }
 
         public IEnumerable<CategoryInfoModel> Categories { get; set; } = new List<CategoryInfoModel>();
