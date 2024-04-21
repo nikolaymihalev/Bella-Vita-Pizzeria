@@ -13,11 +13,5 @@ namespace Bella_Vita_Pizzeria.Controllers
         {
             productService = _productService;
         }
-
-        [HttpGet]
-        public IActionResult Index()
-        {
-            return View();
-        }
     }
 }

@@ -20,6 +20,10 @@ namespace Bella_Vita_Pizzeria.Controllers
 
         public async Task<IActionResult> Index()
         {
+            if (User.IsInRole("Admin"))
+            {
+                return RedirectToAction("AllUsers", "Admin");
+            }
             ViewBag.Categories = await categoryService.GetAllCategoriesAsync();
             return View();
         }
