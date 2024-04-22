@@ -15,14 +15,14 @@
                 <div class="col">
                     <img class="img-fluid" src="data:image/png;base64,@Model.Image" alt="Image" style="width: 500px; height: 250px;">
                     <br>
-                    @if (User?.Identity?.IsAuthenticated==true && Model.IsInUserFavoriteCollection == false)
+                    @if (User?.Identity?.IsAuthenticated==true && Model.IsInUserFavoriteCollection == false && User?.IsInRole("Admin") == false)
                     {
                         <a asp-controller="FavoriteProduct" asp-action="AddFavoriteProduct" asp-route-id="@Model.Id" style="color: black; text-decoration: none;">
                             <img src="~/images/heart.png" style="width: 30px; height: 30px" />
                             Add to favorites
                         </a>                        
                     }
-                    @if (User?.Identity?.IsAuthenticated == true && Model.IsInUserFavoriteCollection == true)
+                    @if (User?.Identity?.IsAuthenticated == true && Model.IsInUserFavoriteCollection == true && User?.IsInRole("Admin") == false)
                     {
                         <a disabled style="color: black; text-decoration: none;">
                             <img src="~/images/heart_red.png" style="width: 30px; height: 30px" />
@@ -96,13 +96,20 @@
                     </div>
                 </div>
             </div>
-        @if (User?.Identity?.IsAuthenticated==true)
-        {         
-            @if (User.IsInRole("Admin"))
-            {
-                <a asp-controller="Product" asp-action="Delete" asp-route-id="@Model.Id" class="btn btn-danger mb-2 w-100 p-3 fw-bold">Delete</a>
-            }          
-        }
+            @{
+                if (User?.Identity?.IsAuthenticated == true)
+                {
+                    if (User?.IsInRole("Admin") == true)
+                    {
+                        <a asp-controller="Product" asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-warning mb-2 w-100 p-3 fw-bold">Edit</a>
+                        <a asp-controller="Product" asp-action="Delete" asp-route-id="@Model.Id" class="btn btn-danger mb-2 w-100 p-3 fw-bold">Delete</a>
+                    }
+                    else
+                    {
+                        <a asp-controller="Rating" asp-action="Add" asp-route-productId="@Model.Id" class="btn btn-warning mb-2 w-100 p-3 fw-bold">Rate the @Model.Title</a>
+                    }
+                }
+            }
         </div>
     </div>
 </div>
