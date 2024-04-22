@@ -1,6 +1,4 @@
-﻿@inject ICategoryService categoryService
-
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8" />
@@ -14,7 +12,7 @@
     <header>
         <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light border-bottom box-shadow mb-3" style="background-color: white;">
             <div class="container-fluid">
-                <a class="navbar-brand" asp-controller="Home" asp-action="Index">
+                <a class="navbar-brand" asp-controller="Admin" asp-action="AllUsers">
                     <img src="~/images/Logo.png" style="width: 130px" alt="Image"/>
                 </a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
@@ -22,36 +20,31 @@
                     <span class="navbar-toggler-icon"></span>
                 </button>
                 <div class="navbar-collapse collapse d-sm-inline-flex justify-content-center">
-                    <ul class="navbar-nav flex-grow-1" >                        
+                    <ul class="navbar-nav flex-grow-1" >  
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle text-dark fw-bold" style="font-size: 20px;" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                Menu
+                                View
                             </a>
                             <ul class="dropdown-menu">
-                                @{
-                                    var categories = await categoryService.GetAllCategoriesAsync();
-                                    var listCateg = categories.ToList();
-
-                                    for (int i = 0; i < listCateg.Count(); i++)
-                                    {
-                                        var imageSrc = listCateg[i].Name + ".jfif";
-
-                                        <li class="nav-item">
-                                            <a asp-action="AllProducts" asp-controller="Product" asp-route-category="@listCateg[i].Name" class="nav-link text-dark">
-                                                <img src="~/images/categories/@imageSrc" alt="Image" style="width: 3rem; height: 3rem;">
-                                                <h5 class="card-title mt-1">@listCateg[i].Name</h5>
-                                            </a>
-                                        </li>
-                                    }
-                                }                                
+                                <a class="nav-link text-dark fw-bold" style="font-size: 20px;" asp-controller="Admin" asp-action="AllUsers">Users</a>
+                                <a class="nav-link text-dark fw-bold" style="font-size: 20px;" asp-controller="Admin" asp-action="AllRoles">Roles</a>
+                                <a class="nav-link text-dark fw-bold" style="font-size: 20px;" asp-controller="Product" asp-action="AllProducts">Products</a>
+                            </ul>
+                        </li>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle text-dark fw-bold" style="font-size: 20px;" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                Add
+                            </a>
+                            <ul class="dropdown-menu">
+                                <a class="nav-link text-dark fw-bold" style="font-size: 20px;" asp-controller="Admin" asp-action="AddRole">Role</a>
+                                <a class="nav-link text-dark fw-bold" style="font-size: 20px;" asp-controller="Product" asp-action="Add">Product</a>
                             </ul>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-dark fw-bold" style="font-size: 20px;" asp-controller="Home" asp-action="AboutUs">About us</a>
-                        </li>
-                                             
+                            <a class="nav-link text-dark fw-bold" style="font-size: 20px;" asp-controller="Admin" asp-action="GetStatistics">Statistics</a>
+                        </li>                                             
                     </ul>
-                    <partial name="_MenuPartial" />
+                    <partial name="_AdminMenuPartial"/>
                 </div>
             </div>
         </nav>
