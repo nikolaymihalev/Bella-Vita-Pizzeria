@@ -56,5 +56,13 @@ namespace Bella_Vita_Pizzeria.Controllers
 
             return RedirectToAction(nameof(AllRoles));
         }
+
+        [HttpGet]
+        public async Task<IActionResult> AllRoles() 
+        {
+            var model = await adminService.GetAllRolesAsync();
+
+            return View(model);
+        }
     }
 }
