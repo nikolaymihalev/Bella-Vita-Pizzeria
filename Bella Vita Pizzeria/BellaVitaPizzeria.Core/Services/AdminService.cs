@@ -18,9 +18,10 @@ namespace BellaVitaPizzeria.Core.Services
         public async Task<IEnumerable<RoleModel>> GetAllRolesAsync()
         {
             return await repository.AllReadonly<IdentityRole>()
-                .Select(x => new RoleModel(
-                    x.Id,
-                    x.Name))
+                .Select(x => new RoleModel() {
+                   Id = x.Id,
+                   Name = x.Name
+                })
                 .ToListAsync();
         }
 
