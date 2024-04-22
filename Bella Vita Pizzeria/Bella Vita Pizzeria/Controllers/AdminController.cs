@@ -4,14 +4,22 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace Bella_Vita_Pizzeria.Controllers
 {
-    [Authorize(Roles = "Admin")]
+    //[Authorize(Roles = "Admin")]
     public class AdminController : Controller
     {
-        private readonly IProductService productService;
+        private readonly IAdminService adminService;
 
-        public AdminController(IProductService _productService)
+        public AdminController(IAdminService _adminService)
         {
-            productService = _productService;
+            adminService = _adminService;
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> AllUsers() 
+        {
+            var model = await adminService.GetAllUsersAsync();
+
+            return View(model);
         }
     }
 }
