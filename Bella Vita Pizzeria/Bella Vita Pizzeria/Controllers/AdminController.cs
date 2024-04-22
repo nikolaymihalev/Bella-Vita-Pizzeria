@@ -6,18 +6,21 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace Bella_Vita_Pizzeria.Controllers
 {
-    //[Authorize(Roles = "Admin")]
+    [Authorize(Roles = "Admin")]
     public class AdminController : Controller
     {
         private readonly IAdminService adminService;
         private readonly RoleManager<IdentityRole> roleManager;
+        private readonly UserManager<IdentityUser> userManager;
 
         public AdminController(
             IAdminService _adminService,
-            RoleManager<IdentityRole> _roleManager)
+            RoleManager<IdentityRole> _roleManager,
+            UserManager<IdentityUser> _userManager)
         {
             adminService = _adminService;
             roleManager = _roleManager;
+            userManager = _userManager;
         }
 
         [HttpGet]
@@ -63,6 +66,25 @@ namespace Bella_Vita_Pizzeria.Controllers
             var model = await adminService.GetAllRolesAsync();
 
             return View(model);
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> AddUserToRole(string username, string roleName)
+        {
+            if (await roleManager.RoleExistsAsync(roleName))
+            {
+                var user = await userManager.FindByNameAsync(username);
+
+                if (user != null)
+                {
+                    if (await userManager.IsInRoleAsync(user, roleName) == false)
+                    {
+                        await userManager.AddToRoleAsync(user, roleName);
+                    }
+                }
+            }
+
+            return RedirectToAction(nameof(AllUsers));
         }
     }
 }
