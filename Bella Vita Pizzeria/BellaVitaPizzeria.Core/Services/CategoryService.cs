@@ -38,28 +38,28 @@ namespace BellaVitaPizzeria.Core.Services
         {
             var entity = await repository.GetByIdAsync<Category>(id);
 
-            if (entity != null) 
+            if (entity == null) 
             {
-                await repository.DeleteAsync<Category>(id);
-
-                await repository.SaveChangesAsync();
+                throw new ArgumentException(ErrorMessagesConstants.OperationFailedErrorMessage);
             }
 
-            throw new ArgumentException(ErrorMessagesConstants.OperationFailedErrorMessage);
+            await repository.DeleteAsync<Category>(id);
+
+            await repository.SaveChangesAsync();
         }
 
         public async Task EditAsync(CategoryFormModel model)
         {
             var entity = await repository.GetByIdAsync<Category>(model.Id);
 
-            if (entity != null) 
+            if (entity == null) 
             {
-                entity.Name = model.Name;
-
-                await repository.SaveChangesAsync();
+                throw new ArgumentException(string.Format(ErrorMessagesConstants.InvalidModelErrorMessage, "category"));                
             }
 
-            throw new ArgumentException(string.Format(ErrorMessagesConstants.InvalidModelErrorMessage, "category"));
+            entity.Name = model.Name;
+
+            await repository.SaveChangesAsync();
         }
 
         public async Task<IEnumerable<CategoryInfoModel>> GetAllCategoriesAsync()
