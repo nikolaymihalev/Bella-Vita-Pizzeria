@@ -99,7 +99,7 @@ namespace Bella_Vita_Pizzeria.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> ConfirmOrder(int id) 
+        public async Task<IActionResult> ConfirmOrder(int id)
         {
             await cartService.CompleteOrderAsync(id);
 
@@ -112,6 +112,19 @@ namespace Bella_Vita_Pizzeria.Controllers
             await cartService.DeleteOrderAsync(id);
 
             return RedirectToAction(nameof(Orders));
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> FindPurchase(int purchaseId) 
+        {
+            var model = await cartService.GetPurchaseByIdAsync(purchaseId);
+
+            if (model == null) 
+            {
+                return BadRequest();
+            }
+
+            return View(model);
         }
     }
 }

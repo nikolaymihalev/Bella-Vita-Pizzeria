@@ -12,5 +12,6 @@ namespace BellaVitaPizzeria.Core.Contracts
         Task<IEnumerable<OrderFormModel>> GetOrdersAsync();
         Task CompleteOrderAsync(int id);
         Task DeleteOrderAsync(int id);
+        Task<PurchaseModel?> GetPurchaseByIdAsync(int id);
     }
 }

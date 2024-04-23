@@ -1,0 +1,30 @@
+﻿@model PurchaseModel
+@{
+    ViewBag.Title = Model.Title;
+}
+
+<partial name="_PageBannerPartial" model="@Model.Title" />
+
+<div class="row">
+    <div class="card w-100">
+        <div class="card-body">
+            <div class="row row-cols-1 row-cols-md-3 g-4">
+                <div class="col">
+                    <img class="img-fluid" src="data:image/png;base64,@Model.Image" alt="Image" style="width: 500px; height: 250px;">
+                    <br>
+                </div>
+                <div class="col">
+                    <h3>@Model.Title</h3><br>
+                    <p class="mb-0"><span class="fw-bold">Size - </span> @Model.Size</p><br>
+                    <p class="mb-0"><span class="fw-bold">Quantity - </span> @Model.Quantity</p><br>
+                    <p class="mb-0"><span class="fw-bold">Un. Price - </span> @Model.UnitPrice</p><br>
+                    <p class="mb-0"><span class="fw-bold">Sum - </span> @Model.Sum</p><br>
+                </div>
+            </div>
+        </div>        
+    </div>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}
