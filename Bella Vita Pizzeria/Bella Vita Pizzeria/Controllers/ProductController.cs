@@ -158,6 +158,13 @@ namespace Bella_Vita_Pizzeria.Controllers
             {
                 Id = product.Id,
                 Title = product.Title,
+                Description = product.Description,
+                MinimumSize = product.MinimumSize,
+                MiddleSize = product.MiddleSize,
+                MaximumSize = product.MaxmimumSize,
+                MinimumPrice = product.MinimumPrice,
+                MiddlePrice = product.MiddlePrice,
+                MaximumPrice = product.MaximumPrice,
                 CategoryId = category.Id,
                 Categories = await categoryService.GetAllCategoriesAsync()
             };
