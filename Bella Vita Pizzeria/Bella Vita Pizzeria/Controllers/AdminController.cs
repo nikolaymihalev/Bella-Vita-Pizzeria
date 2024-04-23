@@ -43,16 +43,16 @@ namespace Bella_Vita_Pizzeria.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> AddRole(RoleModel model) 
+        public async Task<IActionResult> AddRole(RoleModel model)
         {
-            if (!ModelState.IsValid) 
+            if (!ModelState.IsValid)
             {
                 return BadRequest();
             }
 
-            if (await roleManager.RoleExistsAsync(model.Name) == false) 
+            if (await roleManager.RoleExistsAsync(model.Name) == false)
             {
-                var role = new IdentityRole() 
+                var role = new IdentityRole()
                 {
                     Name = model.Name,
                 };
@@ -64,7 +64,7 @@ namespace Bella_Vita_Pizzeria.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> AllRoles() 
+        public async Task<IActionResult> AllRoles()
         {
             var model = await adminService.GetAllRolesAsync();
 
@@ -91,11 +91,19 @@ namespace Bella_Vita_Pizzeria.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> Orders() 
+        public async Task<IActionResult> Orders()
         {
             var model = await cartService.GetOrdersAsync();
 
             return View(model);
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> ConfirmOrder(int id) 
+        {
+            await cartService.CompleteOrderAsync(id);
+
+            return RedirectToAction(nameof(Orders));
         }
     }
 }

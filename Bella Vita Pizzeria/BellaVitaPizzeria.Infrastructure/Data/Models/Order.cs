@@ -60,6 +60,9 @@ namespace BellaVitaPizzeria.Infrastructure.Data.Models
         [Required]
         public double TotalSum { get; set; }
 
+        [Comment("Is order completed")]
+        public bool IsCompleted { get; set; }
+
         public IEnumerable<int> PurchasesIds => _purchasesIds;
         public void AddPurchases(int[] purchasesIds) => _purchasesIds = new List<int>(_purchasesIds.Union(purchasesIds));
     }

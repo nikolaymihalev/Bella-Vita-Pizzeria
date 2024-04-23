@@ -166,6 +166,7 @@ namespace BellaVitaPizzeria.Core.Services
         public async Task<IEnumerable<OrderFormModel>> GetOrdersAsync()
         {
             return await repository.AllReadonly<Order>()
+                .Where(x=>x.IsCompleted==false)
                 .Select(x => new OrderFormModel()
                 {
                     Id = x.Id,
@@ -180,6 +181,18 @@ namespace BellaVitaPizzeria.Core.Services
                     UserId = x.UserId,
                     TotalSum = x.TotalSum
                 }).ToListAsync();
+        }
+
+        public async Task CompleteOrderAsync(int id)
+        {
+            var order = await repository.GetByIdAsync<Order>(id);
+
+            if (order != null) 
+            {
+                order.IsCompleted = true;
+
+                await repository.SaveChangesAsync();
+            }
         }
     }
 }
