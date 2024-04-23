@@ -105,5 +105,13 @@ namespace Bella_Vita_Pizzeria.Controllers
 
             return RedirectToAction(nameof(Orders));
         }
+
+        [HttpGet]
+        public async Task<IActionResult> RemoveOrder(int id)
+        {
+            await cartService.DeleteOrderAsync(id);
+
+            return RedirectToAction(nameof(Orders));
+        }
     }
 }
