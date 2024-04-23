@@ -162,5 +162,23 @@ namespace BellaVitaPizzeria.Core.Services
                 await repository.SaveChangesAsync();
             }
         }
+
+        public async Task<IEnumerable<OrderFormModel>> GetOrdersAsync()
+        {
+            return await repository.AllReadonly<Order>()
+                .Select(x => new OrderFormModel()
+                {
+                    Id = x.Id,
+                    FirstName = x.FirstName,
+                    LastName = x.LastName,
+                    Email = x.Email,
+                    PhoneNumber = x.PhoneNumber,
+                    Town = x.Town,
+                    Street = x.Street,
+                    Comment = x.Comment,
+                    UserId = x.UserId,
+                    TotalSum = x.TotalSum
+                }).ToListAsync();
+        }
     }
 }
