@@ -176,6 +176,7 @@ namespace BellaVitaPizzeria.Core.Services
                     Town = x.Town,
                     Street = x.Street,
                     Comment = x.Comment,
+                    PurchasesIds = x.PurchasesIds,
                     UserId = x.UserId,
                     TotalSum = x.TotalSum
                 }).ToListAsync();

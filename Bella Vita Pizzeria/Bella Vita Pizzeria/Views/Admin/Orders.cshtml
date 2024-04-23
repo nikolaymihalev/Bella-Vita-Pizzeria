@@ -1,0 +1,44 @@
+﻿@model IEnumerable<OrderFormModel>
+
+@{
+    string name = "Orders";
+    <partial name="_PageBannerPartial" model="name" />
+}
+
+<table id="printTable" class="table table-bordered table-striped">
+    <tr>
+        <th scope="col">First Name</th>
+        <th scope="col">Last Name</th>
+        <th scope="col">Email</th>
+        <th scope="col">Phone Number</th>
+        <th scope="col">Town</th>
+        <th scope="col">Street</th>
+        <th scope="col">Comment</th>
+        <th scope="col">Purchases</th>
+        <th scope="col">Total Sum</th>
+    </tr>
+    @if (Model != null)
+    {
+        var list = Model.ToList();
+        @for (int i = 0; i < Model.Count(); i++)
+        {
+            <tr>
+                <td>@list[i].FirstName</td>
+                <td>@list[i].LastName</td>
+                <td>@list[i].Email</td>
+                <td>@list[i].PhoneNumber</td>
+                <td>@list[i].Town</td>
+                <td>@list[i].Street</td>
+                <td>@list[i].Comment</td>
+                <td>@string.Join(", ",list[i].PurchasesIds)</td>
+                <td>@list[i].TotalSum lv.</td>
+                <td>
+                    <a asp-controller="Admin" asp-action="ConfirmOrder" asp-route-id="@list[i].Id" class="btn btn-success">Confirm</a>
+                </td>
+                <td>
+                    <a asp-controller="Admin" asp-action="RemoveOrder" asp-route-id="@list[i].Id" class="btn btn-danger">Cancel</a>
+                </td>
+            </tr>
+        }
+    }
+</table>

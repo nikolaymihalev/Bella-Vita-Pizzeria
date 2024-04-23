@@ -1,6 +1,7 @@
 ﻿using BellaVitaPizzeria.Core.Contracts;
 using BellaVitaPizzeria.Core.Models;
 using BellaVitaPizzeria.Core.Models.Cart;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using System.Security.Claims;
 
@@ -10,13 +11,16 @@ namespace Bella_Vita_Pizzeria.Controllers
     {
         private readonly IProductService productService;
         private readonly ICartService cartService;
+        private readonly UserManager<IdentityUser> userManager;
 
         public UserController(
             IProductService _productService,
-            ICartService _cartService)
+            ICartService _cartService,
+            UserManager<IdentityUser> _userManager)
         {
             productService = _productService;
             cartService = _cartService;
+            userManager = _userManager;
         }
 
         [HttpGet]
@@ -93,6 +97,8 @@ namespace Bella_Vita_Pizzeria.Controllers
         public async Task<IActionResult> Checkout() 
         {
             var model = new OrderFormModel();
+
+            model.Email = userManager.FindByIdAsync(User.Id()).Result.Email;
 
             return View(model);
         }

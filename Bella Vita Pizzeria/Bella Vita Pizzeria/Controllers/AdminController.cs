@@ -10,17 +10,20 @@ namespace Bella_Vita_Pizzeria.Controllers
     public class AdminController : Controller
     {
         private readonly IAdminService adminService;
+        private readonly ICartService cartService;
         private readonly RoleManager<IdentityRole> roleManager;
         private readonly UserManager<IdentityUser> userManager;
 
         public AdminController(
             IAdminService _adminService,
             RoleManager<IdentityRole> _roleManager,
-            UserManager<IdentityUser> _userManager)
+            UserManager<IdentityUser> _userManager,
+            ICartService _cartService)
         {
             adminService = _adminService;
             roleManager = _roleManager;
             userManager = _userManager;
+            cartService = _cartService;
         }
 
         [HttpGet]
@@ -85,6 +88,14 @@ namespace Bella_Vita_Pizzeria.Controllers
             }
 
             return RedirectToAction(nameof(AllUsers));
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> Orders() 
+        {
+            var model = await cartService.GetOrdersAsync();
+
+            return View(model);
         }
     }
 }
