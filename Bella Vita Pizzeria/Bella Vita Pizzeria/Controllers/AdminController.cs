@@ -126,5 +126,13 @@ namespace Bella_Vita_Pizzeria.Controllers
 
             return View(model);
         }
+
+        [HttpGet]
+        public async Task<IActionResult> GetStatistics() 
+        {
+            var model = await adminService.GetStatisticsAsync();
+
+            return View(model);
+        }
     }
 }
