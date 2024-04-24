@@ -116,6 +116,7 @@ namespace BellaVitaPizzeria.Core.Services
                     Street = model.Street,
                     Comment = model.Comment,
                     UserId = model.UserId,
+                    CreationDate = DateTime.Now,
                 };
 
                 order.AddPurchases(purchasesIds);
