@@ -1,6 +1,8 @@
 ﻿using BellaVitaPizzeria.Core.Contracts;
+using BellaVitaPizzeria.Core.Models.Cart;
 using BellaVitaPizzeria.Core.Models.User;
 using BellaVitaPizzeria.Infrastructure.Common;
+using BellaVitaPizzeria.Infrastructure.Data.Models;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 
@@ -32,6 +34,26 @@ namespace BellaVitaPizzeria.Core.Services
                     x.Id,
                     x.UserName))
                 .ToListAsync();
+        }
+
+        public async Task<OrdersStatisticModel> GetStatisticsAsync()
+        {
+            var model = new OrdersStatisticModel();
+            var orders = await repository.AllReadonly<Order>().ToListAsync();
+
+            for (int i = 1; i <= 12; i++)
+            {
+                model.MonthsCounts[i] = 0;
+            }
+
+            foreach (var order in orders) 
+            {
+                int month = order.CreationDate.Month;
+
+                model.MonthsCounts[month]++;
+            }
+
+            return model;
         }
 
         public async Task<bool> UserExistsAsync(string userId)
