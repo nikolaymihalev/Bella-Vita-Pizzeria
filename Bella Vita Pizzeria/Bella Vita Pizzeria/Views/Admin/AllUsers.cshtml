@@ -1,4 +1,6 @@
-﻿@model IEnumerable<UserModel>
+﻿@inject IAdminService adminService
+
+@model IEnumerable<UserModel>
 @{
     ViewBag.Title = "All Users";
 }
@@ -16,6 +18,7 @@
             <div class="card text-center col-4" style="width: 20rem; ">
                 <div class="card-body">
                     <h5 class="card-title mt-1">@r.Username</h5>
+                    <p class="lh-lg mb-0"><span class="fw-bold">Orders: </span>@await adminService.GetUserOrdersCountAsync(r.Id)</p>
                 </div>
             </div>
         }

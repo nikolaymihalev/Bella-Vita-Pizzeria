@@ -8,6 +8,7 @@ namespace BellaVitaPizzeria.Core.Contracts
         Task<IEnumerable<UserModel>> GetAllUsersAsync();
         Task<IEnumerable<RoleModel>> GetAllRolesAsync();
         Task<OrdersStatisticModel> GetStatisticsAsync();
+        Task<int> GetUserOrdersCountAsync(string userId);
         Task<bool> UserExistsAsync(string userId);
     }
 }

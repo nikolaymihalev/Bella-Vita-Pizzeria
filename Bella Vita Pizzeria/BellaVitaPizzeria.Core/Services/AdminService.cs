@@ -56,6 +56,13 @@ namespace BellaVitaPizzeria.Core.Services
             return model;
         }
 
+        public async Task<int> GetUserOrdersCountAsync(string userId)
+        {
+            return await repository.AllReadonly<Order>()
+                .Where(x => x.UserId == userId)
+                .CountAsync();
+        }
+
         public async Task<bool> UserExistsAsync(string userId)
         {
             return await repository.AllReadonly<IdentityUser>().AnyAsync(x => x.Id == userId);
