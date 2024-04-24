@@ -1,6 +1,8 @@
 ﻿using BellaVitaPizzeria.Core.Contracts;
+using BellaVitaPizzeria.Core.Models.Cart;
 using BellaVitaPizzeria.Core.Models.User;
 using BellaVitaPizzeria.Infrastructure.Common;
+using BellaVitaPizzeria.Infrastructure.Data.Models;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 

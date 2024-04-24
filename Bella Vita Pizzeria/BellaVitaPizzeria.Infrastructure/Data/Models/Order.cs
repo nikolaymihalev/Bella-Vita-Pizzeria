@@ -63,6 +63,9 @@ namespace BellaVitaPizzeria.Infrastructure.Data.Models
         [Comment("Is order completed")]
         public bool IsCompleted { get; set; }
 
+        [Comment("Date of creation")]
+        public DateTime CreationDate { get; set; }
+
         public IEnumerable<int> PurchasesIds => _purchasesIds;
         public void AddPurchases(int[] purchasesIds) => _purchasesIds = new List<int>(_purchasesIds.Union(purchasesIds));
     }
