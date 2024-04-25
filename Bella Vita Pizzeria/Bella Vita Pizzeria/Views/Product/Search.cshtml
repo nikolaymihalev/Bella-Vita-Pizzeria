@@ -5,7 +5,21 @@
 <h2 class="title">Result</h2>
 <hr />
 
-<partial name="_ProductPartial" model="Model" />
+@if (Model.Any())
+{
+    <p class="text-end">Total @Model.Count() products</p>
+    <div class="text-center row">
+        @foreach (var p in Model)
+        {
+            <div class="card text-center col-4" style="width: 20rem; ">
+                <div class="card-body">
+                    <partial name="_ProductInfoPartial" model="@p" />
+                </div>
+            </div>
+        }
+    </div>
+}
+
 
 @section Scripts {
     <partial name="_ValidationScriptsPartial" />
