@@ -49,3 +49,12 @@ body {
     display: inline-block;
     margin: 0 10px;
 }
+
+.searchButton {
+    background-color: white;
+    border: none;    
+}
+
+#searchForm {
+    display: none;
+}   
