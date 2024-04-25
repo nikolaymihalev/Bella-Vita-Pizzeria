@@ -208,5 +208,19 @@ namespace Bella_Vita_Pizzeria.Controllers
 
             return RedirectToAction(nameof(AllProducts));
         }
+
+        [HttpGet]
+        [AllowAnonymous]
+        public async Task<IActionResult> Search(string title) 
+        {
+            if (string.IsNullOrEmpty(title) == false && title != "" && title != " ") 
+            {
+                var model = await productService.GetSearchedProductsAsync(title);
+
+                return View(model);
+            }
+
+            return RedirectToAction(nameof(AllProducts));
+        }
     }
 }
