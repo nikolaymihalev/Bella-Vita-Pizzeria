@@ -4,9 +4,12 @@
 
 <ul class="navbar-nav">
     <li class="nav-item">
-        <a class="nav-link text-dark" asp-action="" asp-controller="">
+        <button onclick="searchForm">
             <img src="~/images/magnifier.png" style="width: 30px; height: 30px" />
-        </a>
+        </button>
+        <div id="myDIV">
+            This is my DIV element.
+        </div>
     </li>
     @if (SignInManager.IsSignedIn(User))
     {
