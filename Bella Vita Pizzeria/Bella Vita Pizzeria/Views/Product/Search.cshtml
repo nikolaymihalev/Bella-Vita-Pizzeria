@@ -1,0 +1,12 @@
+﻿@model IEnumerable<ProductInfoModel>
+@{
+    ViewBag.Title = "Products Result";
+}
+<h2 class="title">Result</h2>
+<hr />
+
+<partial name="_ProductPartial" model="Model" />
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}
