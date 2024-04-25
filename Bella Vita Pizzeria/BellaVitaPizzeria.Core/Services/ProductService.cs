@@ -159,5 +159,25 @@ namespace BellaVitaPizzeria.Core.Services
 
             return model;
         }
+
+        public async Task<IEnumerable<ProductInfoModel>> GetSearchedProductsAsync(string title)
+        {
+            return await repository.AllReadonly<Product>()
+                .Where(x=>x.Title.ToLower().Contains(title.ToLower()))
+                .Select(x => new ProductInfoModel(
+                    x.Id,
+                    x.Title,
+                    x.Description ?? string.Empty,
+                    Convert.ToBase64String(x.Image),
+                    x.CategoryId,
+                    x.Category.Name,
+                    x.MinimumPrice,
+                    x.MiddlePrice ?? 0,
+                    x.MaximumPrice ?? 0,
+                    x.MinimumSize,
+                    x.MiddleSize ?? string.Empty,
+                    x.MaxmimumSize ?? string.Empty))
+                .ToListAsync();
+        }
     }
 }
